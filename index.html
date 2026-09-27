@@ -1,350 +1,702 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de" data-theme="system">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Schlaubi Schlumpf – Gemini API-Key verknüpfen</title>
-  
-  <meta name="description" content="Verknüpfe deinen persönlichen Google Gemini API-Key mit dem Alexa Skill Schlaubi Schlumpf über das sichere Amazon Account Linking.">
-  <meta name="theme-color" content="#1a73e8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="page-wrapper">
-    <!-- Header / Top Bar -->
-    <header class="app-header">
-      <div class="brand">
-        <img src="favicon.svg" alt="Schlaubi Schlumpf Logo" class="brand-logo" width="44" height="44">
-        <div class="brand-text">
-          <h1 class="brand-title">Schlaubi Schlumpf</h1>
-          <span class="brand-badge">Gemini AI Alexa Skill</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Schlaubi Schlumpf – Gemini API-Key verknüpfen</title>
+
+    <meta
+      name="description"
+      content="Verknüpfe deinen persönlichen Google Gemini API-Key mit dem Alexa Skill Schlaubi Schlumpf über das sichere Amazon Account Linking."
+    />
+    <meta
+      name="theme-color"
+      content="#1a73e8"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0f172a"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- Header / Top Bar -->
+      <header class="app-header">
+        <div class="brand">
+          <img
+            src="favicon.svg"
+            alt="Schlaubi Schlumpf Logo"
+            class="brand-logo"
+            width="44"
+            height="44"
+          />
+          <div class="brand-text">
+            <h1 class="brand-title">Schlaubi Schlumpf</h1>
+            <span class="brand-badge">Gemini AI Alexa Skill</span>
+          </div>
         </div>
-      </div>
-      <div class="header-actions">
-        <!-- Language Switcher -->
-        <button id="langToggleBtn" class="icon-button" type="button" aria-label="Sprache wechseln" title="Sprache wechseln (DE / EN)">
-          <span id="langLabel" class="button-label">DE</span>
-        </button>
-        <!-- Theme Toggle -->
-        <button id="themeToggleBtn" class="icon-button" type="button" aria-label="Design umschalten" title="Helles / Dunkles Design">
-          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
-    </header>
+        <div class="header-actions">
+          <!-- Language Switcher -->
+          <button
+            id="langToggleBtn"
+            class="icon-button"
+            type="button"
+            aria-label="Sprache wechseln"
+            title="Sprache wechseln (DE / EN)"
+          >
+            <span id="langLabel" class="button-label">DE</span>
+          </button>
+          <!-- Theme Toggle -->
+          <button
+            id="themeToggleBtn"
+            class="icon-button"
+            type="button"
+            aria-label="Design umschalten"
+            title="Helles / Dunkles Design"
+          >
+            <svg
+              class="theme-icon sun-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg
+              class="theme-icon moon-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
 
-    <!-- Main Card Container -->
-    <main class="main-card">
-      <!-- Session Status Banner -->
-      <div id="sessionBanner" class="session-banner" role="status" aria-live="polite">
-        <!-- Dynamically rendered: Connected / Direct visit alert -->
-      </div>
-
-      <!-- Tab Navigation -->
-      <nav class="nav-tabs" role="tablist" aria-label="Hauptnavigation">
-        <button id="tabLinkBtn" class="tab-button active" role="tab" aria-selected="true" aria-controls="linkPanel" data-tab="link">
-          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-          </svg>
-          <span class="tab-text" data-i18n="tab_link">Verknüpfen</span>
-        </button>
-        <button id="tabGuideBtn" class="tab-button" role="tab" aria-selected="false" aria-controls="guidePanel" data-tab="guide">
-          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          <span class="tab-text" data-i18n="tab_guide">Anleitung</span>
-        </button>
-        <button id="tabPrivacyBtn" class="tab-button" role="tab" aria-selected="false" aria-controls="privacyPanel" data-tab="privacy">
-          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-          <span class="tab-text" data-i18n="tab_privacy">Datenschutz</span>
-        </button>
-      </nav>
-
-      <!-- Panel 1: Account Linking Form -->
-      <section id="linkPanel" class="tab-panel active" role="tabpanel" aria-labelledby="tabLinkBtn">
-        <div class="panel-intro">
-          <h2 class="panel-title" data-i18n="link_title">Gemini API-Key verknüpfen</h2>
-          <p class="panel-subtitle" data-i18n="link_subtitle">
-            Gib deinen persönlichen Google Gemini API-Key ein, um den Alexa Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.
-          </p>
+      <!-- Main Card Container -->
+      <main class="main-card">
+        <!-- Session Status Banner -->
+        <div
+          id="sessionBanner"
+          class="session-banner"
+          role="status"
+          aria-live="polite"
+        >
+          <!-- Dynamically rendered: Connected / Direct visit alert -->
         </div>
 
-        <form id="authForm" class="auth-form" novalidate>
-          <div class="input-group">
-            <div class="label-row">
-              <label for="apiKeyInput" class="form-label" data-i18n="label_api_key">Google Gemini API-Key</label>
-              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="link-external" data-i18n="get_key_link">
-                Key besorgen ↗
-              </a>
-            </div>
-            
-            <div class="input-wrapper">
-              <span class="input-icon" aria-hidden="true">🔑</span>
-              <input 
-                type="password" 
-                id="apiKeyInput" 
-                name="apiKey" 
-                class="form-input" 
-                placeholder="AIzaSy..." 
-                spellcheck="false" 
-                autocorrect="off" 
-                autocapitalize="off" 
-                autocomplete="off" 
-                required
-              >
-              <div class="input-actions">
-                <button type="button" id="togglePasswordBtn" class="action-icon-btn" aria-label="API-Key anzeigen" title="API-Key anzeigen / verbergen">
-                  <svg id="eyeOpenIcon" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <svg id="eyeClosedIcon" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                  </svg>
-                </button>
-                <button type="button" id="pasteKeyBtn" class="action-icon-btn" aria-label="Aus Zwischenablage einfügen" title="Aus Zwischenablage einfügen">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                  </svg>
-                </button>
+        <!-- Tab Navigation -->
+        <nav class="nav-tabs" role="tablist" aria-label="Hauptnavigation">
+          <button
+            id="tabLinkBtn"
+            class="tab-button active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="linkPanel"
+            data-tab="link"
+          >
+            <svg
+              class="tab-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+              ></path>
+              <path
+                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+              ></path>
+            </svg>
+            <span class="tab-text" data-i18n="tab_link">Verknüpfen</span>
+          </button>
+          <button
+            id="tabGuideBtn"
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="guidePanel"
+            data-tab="guide"
+          >
+            <svg
+              class="tab-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span class="tab-text" data-i18n="tab_guide">Anleitung</span>
+          </button>
+          <button
+            id="tabPrivacyBtn"
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="privacyPanel"
+            data-tab="privacy"
+          >
+            <svg
+              class="tab-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span class="tab-text" data-i18n="tab_privacy">Datenschutz</span>
+          </button>
+        </nav>
+
+        <!-- Panel 1: Account Linking Form -->
+        <section
+          id="linkPanel"
+          class="tab-panel active"
+          role="tabpanel"
+          aria-labelledby="tabLinkBtn"
+        >
+          <div class="panel-intro">
+            <h2 class="panel-title" data-i18n="link_title">
+              Gemini API-Key verknüpfen
+            </h2>
+            <p class="panel-subtitle" data-i18n="link_subtitle">
+              Gib deinen persönlichen Google Gemini API-Key ein, um den Alexa
+              Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.
+            </p>
+          </div>
+
+          <form id="authForm" class="auth-form" novalidate>
+            <div class="input-group">
+              <div class="label-row">
+                <label
+                  for="apiKeyInput"
+                  class="form-label"
+                  data-i18n="label_api_key"
+                  >Google Gemini API-Key</label
+                >
+                <a
+                  href="https://aistudio.google.com/app/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-external"
+                  data-i18n="get_key_link"
+                >
+                  Key besorgen ↗
+                </a>
+              </div>
+
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">🔑</span>
+                <input
+                  type="password"
+                  id="apiKeyInput"
+                  name="apiKey"
+                  class="form-input"
+                  placeholder="AIzaSy..."
+                  spellcheck="false"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="off"
+                  required
+                />
+                <div class="input-actions">
+                  <button
+                    type="button"
+                    id="togglePasswordBtn"
+                    class="action-icon-btn"
+                    aria-label="API-Key anzeigen"
+                    title="API-Key anzeigen / verbergen"
+                  >
+                    <svg
+                      id="eyeOpenIcon"
+                      class="icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      ></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <svg
+                      id="eyeClosedIcon"
+                      class="icon hidden"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                      ></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    id="pasteKeyBtn"
+                    class="action-icon-btn"
+                    aria-label="Aus Zwischenablage einfügen"
+                    title="Aus Zwischenablage einfügen"
+                  >
+                    <svg
+                      class="icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                      ></path>
+                      <rect
+                        x="8"
+                        y="2"
+                        width="8"
+                        height="4"
+                        rx="1"
+                        ry="1"
+                      ></rect>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="input-hint" id="formatHint">
+                <span class="hint-bullet">•</span>
+                <span data-i18n="format_hint"
+                  >Beginnt üblicherweise mit <code>AIzaSy</code> (39
+                  Zeichen)</span
+                >
               </div>
             </div>
 
-            <div class="input-hint" id="formatHint">
-              <span class="hint-bullet">•</span>
-              <span data-i18n="format_hint">Beginnt üblicherweise mit <code>AIzaSy</code> (39 Zeichen)</span>
+            <!-- Live Key Testing Feedback Box -->
+            <div
+              id="testFeedback"
+              class="feedback-card hidden"
+              role="alert"
+              aria-live="assertive"
+            >
+              <div class="feedback-icon" id="feedbackIcon"></div>
+              <div class="feedback-content">
+                <strong id="feedbackHeading"></strong>
+                <p id="feedbackText"></p>
+              </div>
             </div>
-          </div>
 
-          <!-- Live Key Testing Feedback Box -->
-          <div id="testFeedback" class="feedback-card hidden" role="alert" aria-live="assertive">
-            <div class="feedback-icon" id="feedbackIcon"></div>
-            <div class="feedback-content">
-              <strong id="feedbackHeading"></strong>
-              <p id="feedbackText"></p>
+            <!-- Buttons Group -->
+            <div class="button-group">
+              <button type="button" id="testKeyBtn" class="btn btn-secondary">
+                <svg
+                  class="btn-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  ></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+                <span class="btn-text" data-i18n="btn_test_key"
+                  >Key testen</span
+                >
+                <span class="spinner hidden" id="testSpinner"></span>
+              </button>
+
+              <button type="submit" id="submitBtn" class="btn btn-primary">
+                <span class="btn-text" data-i18n="btn_link_alexa"
+                  >Mit Alexa verknüpfen</span
+                >
+                <svg
+                  class="btn-icon-right"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+                <span class="spinner hidden" id="submitSpinner"></span>
+              </button>
             </div>
-          </div>
+          </form>
 
-          <!-- Buttons Group -->
-          <div class="button-group">
-            <button type="button" id="testKeyBtn" class="btn btn-secondary">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="9" y1="15" x2="15" y2="15"></line>
-              </svg>
-              <span class="btn-text" data-i18n="btn_test_key">Key testen</span>
-              <span class="spinner hidden" id="testSpinner"></span>
+          <!-- Privacy & Security Highlight Box -->
+          <aside class="security-callout">
+            <div class="security-callout-header">
+              <span class="security-badge-icon" aria-hidden="true">🛡️</span>
+              <strong data-i18n="security_title"
+                >Zero-Server Datenschutzgarantie</strong
+              >
+            </div>
+            <p data-i18n="security_desc">
+              Diese Seite läuft zu 100 % in deinem Browser auf GitHub Pages.
+              Dein Schlüssel wird ausschließlich verschlüsselt im URL-Fragment
+              direkt an Amazon Alexa übertragen. Es existiert keine Datenbank
+              und kein Zwischenserver.
+            </p>
+          </aside>
+
+          <!-- Developer Mode Toggle Link (Discreet) -->
+          <div class="dev-mode-link-wrapper">
+            <button
+              type="button"
+              id="devModeToggleLink"
+              class="text-link-subtle"
+              data-i18n="toggle_dev_mode"
+            >
+              🛠️ Entwickler- & Test-Modus
             </button>
+          </div>
 
-            <button type="submit" id="submitBtn" class="btn btn-primary">
-              <span class="btn-text" data-i18n="btn_link_alexa">Mit Alexa verknüpfen</span>
-              <svg class="btn-icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-              <span class="spinner hidden" id="submitSpinner"></span>
-            </button>
-          </div>
-        </form>
+          <!-- Developer Test Box (Hidden by default) -->
+          <section
+            id="devSection"
+            class="dev-section hidden"
+            aria-label="Entwickler-Werkzeuge"
+          >
+            <h3 class="dev-title">🛠️ Entwickler-Testumgebung</h3>
+            <p class="dev-desc">
+              Hier können Parameter für das Alexa Implicit Grant Account Linking
+              simuliert werden:
+            </p>
+            <div class="dev-form-group">
+              <label for="devRedirectUri" class="dev-label"
+                >redirect_uri:</label
+              >
+              <input
+                type="url"
+                id="devRedirectUri"
+                class="dev-input"
+                value="https://layla.amazon.com/api/skill/link/VENDOR_SIMULATION"
+              />
+            </div>
+            <div class="dev-form-group">
+              <label for="devState" class="dev-label">state:</label>
+              <input
+                type="text"
+                id="devState"
+                class="dev-input"
+                value="simulated-state-token-12345"
+              />
+            </div>
+            <div class="dev-actions">
+              <button
+                type="button"
+                id="applyDevParamsBtn"
+                class="btn btn-sm btn-secondary"
+              >
+                Parameter anwenden
+              </button>
+              <button
+                type="button"
+                id="clearDevParamsBtn"
+                class="btn btn-sm btn-ghost"
+              >
+                Zurücksetzen
+              </button>
+            </div>
+            <div class="dev-output">
+              <div class="dev-output-title">Erzeugte Weiterleitungs-URL:</div>
+              <code id="devRedirectPreview" class="dev-code"
+                >Noch nicht generiert</code
+              >
+            </div>
+          </section>
+        </section>
 
-        <!-- Privacy & Security Highlight Box -->
-        <aside class="security-callout">
-          <div class="security-callout-header">
-            <span class="security-badge-icon" aria-hidden="true">🛡️</span>
-            <strong data-i18n="security_title">Zero-Server Datenschutzgarantie</strong>
+        <!-- Panel 2: Step-by-Step Guide -->
+        <section
+          id="guidePanel"
+          class="tab-panel"
+          role="tabpanel"
+          aria-labelledby="tabGuideBtn"
+        >
+          <div class="panel-intro">
+            <h2 class="panel-title" data-i18n="guide_title">
+              So erhältst du deinen kostenlosen API-Key
+            </h2>
+            <p class="panel-subtitle" data-i18n="guide_subtitle">
+              Google stellt Entwicklern und privaten Nutzern ein großzügiges
+              kostenloses Kontingent für Gemini zur Verfügung.
+            </p>
           </div>
-          <p data-i18n="security_desc">
-            Diese Seite läuft zu 100 % in deinem Browser auf GitHub Pages. Dein Schlüssel wird ausschließlich verschlüsselt im URL-Fragment direkt an Amazon Alexa übertragen. Es existiert keine Datenbank und kein Zwischenserver.
-          </p>
-        </aside>
 
-        <!-- Developer Mode Toggle Link (Discreet) -->
-        <div class="dev-mode-link-wrapper">
-          <button type="button" id="devModeToggleLink" class="text-link-subtle" data-i18n="toggle_dev_mode">
-            🛠️ Entwickler- & Test-Modus
-          </button>
-        </div>
+          <ol class="step-list">
+            <li class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-body">
+                <h3 class="step-heading" data-i18n="step1_heading">
+                  Google AI Studio aufrufen
+                </h3>
+                <p data-i18n="step1_desc">
+                  Öffne die offizielle Entwicklerplattform von Google.
+                </p>
+                <a
+                  href="https://aistudio.google.com/app/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-outline btn-sm"
+                >
+                  <span>aistudio.google.com öffnen ↗</span>
+                </a>
+              </div>
+            </li>
 
-        <!-- Developer Test Box (Hidden by default) -->
-        <section id="devSection" class="dev-section hidden" aria-label="Entwickler-Werkzeuge">
-          <h3 class="dev-title">🛠️ Entwickler-Testumgebung</h3>
-          <p class="dev-desc">Hier können Parameter für das Alexa Implicit Grant Account Linking simuliert werden:</p>
-          <div class="dev-form-group">
-            <label for="devRedirectUri" class="dev-label">redirect_uri:</label>
-            <input type="url" id="devRedirectUri" class="dev-input" value="https://layla.amazon.com/api/skill/link/VENDOR_SIMULATION">
-          </div>
-          <div class="dev-form-group">
-            <label for="devState" class="dev-label">state:</label>
-            <input type="text" id="devState" class="dev-input" value="simulated-state-token-12345">
-          </div>
-          <div class="dev-actions">
-            <button type="button" id="applyDevParamsBtn" class="btn btn-sm btn-secondary">Parameter anwenden</button>
-            <button type="button" id="clearDevParamsBtn" class="btn btn-sm btn-ghost">Zurücksetzen</button>
-          </div>
-          <div class="dev-output">
-            <div class="dev-output-title">Erzeugte Weiterleitungs-URL:</div>
-            <code id="devRedirectPreview" class="dev-code">Noch nicht generiert</code>
+            <li class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-body">
+                <h3 class="step-heading" data-i18n="step2_heading">
+                  Mit Google-Konto anmelden
+                </h3>
+                <p data-i18n="step2_desc">
+                  Logge dich mit deinem ganz normalen privaten Google-Konto
+                  (@gmail.com) ein. Eine Kreditkarte ist für den kostenlosen
+                  Free Tier in der Regel nicht erforderlich.
+                </p>
+              </div>
+            </li>
+
+            <li class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-body">
+                <h3 class="step-heading" data-i18n="step3_heading">
+                  API-Schlüssel generieren
+                </h3>
+                <p data-i18n="step3_desc">
+                  Klicke auf die blaue Schaltfläche
+                  <strong>"Create API key"</strong> bzw.
+                  <strong>"API-Schlüssel erstellen"</strong>. Wähle ein
+                  bestehendes Projekt aus oder erstelle mit einem Klick ein
+                  neues Projekt.
+                </p>
+              </div>
+            </li>
+
+            <li class="step-item">
+              <div class="step-number">4</div>
+              <div class="step-body">
+                <h3 class="step-heading" data-i18n="step4_heading">
+                  Schlüssel kopieren & hier einfügen
+                </h3>
+                <p data-i18n="step4_desc">
+                  Kopiere den generierten Schlüssel (beginnt mit
+                  <code>AIzaSy...</code>) in die Zwischenablage und füge ihn im
+                  Reiter
+                  <a href="#verknuepfen" class="inline-link" id="backToLinkTab"
+                    >"Verknüpfen"</a
+                  >
+                  ein.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="faq-box">
+            <h3 class="faq-title" data-i18n="faq_cost_title">
+              💰 Ist das wirklich kostenlos?
+            </h3>
+            <p data-i18n="faq_cost_desc">
+              Ja! Google bietet für Gemini 1.5 Flash und verwandte Modelle im
+              <strong>Free Tier</strong> bis zu 15 Anfragen pro Minute und 1.500
+              Anfragen pro Tag völlig kostenfrei an. Für die alltägliche Nutzung
+              mit Alexa ist dieses Kontingent mehr als ausreichend.
+            </p>
           </div>
         </section>
-      </section>
 
-      <!-- Panel 2: Step-by-Step Guide -->
-      <section id="guidePanel" class="tab-panel" role="tabpanel" aria-labelledby="tabGuideBtn">
-        <div class="panel-intro">
-          <h2 class="panel-title" data-i18n="guide_title">So erhältst du deinen kostenlosen API-Key</h2>
-          <p class="panel-subtitle" data-i18n="guide_subtitle">
-            Google stellt Entwicklern und privaten Nutzern ein großzügiges kostenloses Kontingent für Gemini zur Verfügung.
-          </p>
-        </div>
+        <!-- Panel 3: Privacy Policy (Datenschutz) & Terms (Required for Amazon Certification) -->
+        <section
+          id="privacyPanel"
+          class="tab-panel"
+          role="tabpanel"
+          aria-labelledby="tabPrivacyBtn"
+        >
+          <div class="panel-intro">
+            <h2 class="panel-title" data-i18n="privacy_title">
+              Datenschutzerklärung & Nutzungsbedingungen
+            </h2>
+            <p class="panel-subtitle" data-i18n="privacy_subtitle">
+              Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills
+              Schlaubi Schlumpf.
+            </p>
+          </div>
 
-        <ol class="step-list">
-          <li class="step-item">
-            <div class="step-number">1</div>
-            <div class="step-body">
-              <h3 class="step-heading" data-i18n="step1_heading">Google AI Studio aufrufen</h3>
-              <p data-i18n="step1_desc">
-                Öffne die offizielle Entwicklerplattform von Google.
+          <div class="legal-content">
+            <article class="legal-article" id="datenschutz">
+              <h3 class="legal-heading" data-i18n="legal_privacy_h3">
+                1. Datenschutzerklärung (Privacy Policy)
+              </h3>
+              <p>
+                <strong>Verantwortlicher:</strong> Betreiber des Open-Source
+                Alexa Skills "Schlaubi Schlumpf".
               </p>
-              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                <span>aistudio.google.com öffnen ↗</span>
-              </a>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <div class="step-number">2</div>
-            <div class="step-body">
-              <h3 class="step-heading" data-i18n="step2_heading">Mit Google-Konto anmelden</h3>
-              <p data-i18n="step2_desc">
-                Logge dich mit deinem ganz normalen privaten Google-Konto (@gmail.com) ein. Eine Kreditkarte ist für den kostenlosen Free Tier in der Regel nicht erforderlich.
+              <p>
+                <strong>Erhebung und Speicherung des API-Keys:</strong>
+                Diese Webanwendung wird über GitHub Pages bereitgestellt. Sie
+                verarbeitet keine Formulardaten auf einem Webserver, betreibt
+                keine Backend-Datenbank und speichert keine Cookies oder
+                Analyse-Daten.
               </p>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <div class="step-number">3</div>
-            <div class="step-body">
-              <h3 class="step-heading" data-i18n="step3_heading">API-Schlüssel generieren</h3>
-              <p data-i18n="step3_desc">
-                Klicke auf die blaue Schaltfläche <strong>"Create API key"</strong> bzw. <strong>"API-Schlüssel erstellen"</strong>. Wähle ein bestehendes Projekt aus oder erstelle mit einem Klick ein neues Projekt.
+              <p>
+                <strong>Übertragung via OAuth 2.0 Implicit Grant:</strong>
+                Wenn du deinen Google Gemini API-Key in das Formular eingibst
+                und auf "Mit Alexa verknüpfen" klickst, wird der Schlüssel als
+                Access-Token im URI-Fragment (<code>#access_token=...</code>)
+                verschlüsselt über HTTPS direkt an den Amazon Alexa
+                Autorisierungsserver übertragen. Gemäß der RFC-6749
+                Spezifikation verbleibt der Fragment-Teil einer URL im Webclient
+                und wird zu keinem Zeitpunkt an unsere Webserver gesendet.
               </p>
-            </div>
-          </li>
-
-          <li class="step-item">
-            <div class="step-number">4</div>
-            <div class="step-body">
-              <h3 class="step-heading" data-i18n="step4_heading">Schlüssel kopieren & hier einfügen</h3>
-              <p data-i18n="step4_desc">
-                Kopiere den generierten Schlüssel (beginnt mit <code>AIzaSy...</code>) in die Zwischenablage und füge ihn im Reiter <a href="#verknuepfen" class="inline-link" id="backToLinkTab">"Verknüpfen"</a> ein.
+              <p>
+                <strong>Nutzung im Alexa Skill:</strong>
+                Amazon Alexa speichert den Access-Token sicher im Kontext deines
+                verknüpften Alexa-Benutzerkontos. Bei jeder Sprachanfrage an den
+                Skill "Schlaubi Schlumpf" übergibt Amazon den Access-Token an
+                die AWS Lambda-Funktion des Skills. Die Lambda-Funktion
+                verwendet den API-Key ausschließlich dafür, deine Sprachanfrage
+                an die Google Gemini API weiterzuleiten und die generierte
+                Antwort an dein Alexa-Gerät zurückzugeben.
               </p>
-            </div>
-          </li>
-        </ol>
+              <p>
+                <strong>Widerruf & Löschung:</strong>
+                Du kannst die Verknüpfung jederzeit mit sofortiger Wirkung in
+                der Amazon Alexa App unter
+                <em
+                  >Skills & Spiele &rarr; Schlaubi Schlumpf &rarr; Einstellungen
+                  &rarr; Konto trennen</em
+                >
+                aufheben. Alternativ kannst du den API-Key direkt im
+                <a
+                  href="https://aistudio.google.com/app/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Google AI Studio</a
+                >
+                löschen oder sperren.
+              </p>
+            </article>
 
-        <div class="faq-box">
-          <h3 class="faq-title" data-i18n="faq_cost_title">💰 Ist das wirklich kostenlos?</h3>
-          <p data-i18n="faq_cost_desc">
-            Ja! Google bietet für Gemini 1.5 Flash und verwandte Modelle im <strong>Free Tier</strong> bis zu 15 Anfragen pro Minute und 1.500 Anfragen pro Tag völlig kostenfrei an. Für die alltägliche Nutzung mit Alexa ist dieses Kontingent mehr als ausreichend.
-          </p>
+            <article class="legal-article" id="nutzungsbedingungen">
+              <h3 class="legal-heading" data-i18n="legal_terms_h3">
+                2. Nutzungsbedingungen (Terms of Use)
+              </h3>
+              <p>
+                Der Alexa Skill "Schlaubi Schlumpf" ist eine Schnittstelle zur
+                Nutzung von Googles generativen Sprachmodellen auf
+                Amazon-Echo-Geräten.
+              </p>
+              <p>
+                <strong>Eigener API-Key:</strong>
+                Die Nutzung setzt einen gültigen Google Gemini API-Key voraus,
+                der den Nutzungsbedingungen von Google AI Studio unterliegt.
+              </p>
+              <p>
+                <strong>Haftungsausschluss:</strong>
+                Künstliche Intelligenzen können fehlerhafte, unvollständige oder
+                irreführende Antworten generieren. Der Betreiber übernimmt keine
+                Haftung für die Richtigkeit der von Gemini generierten Antworten
+                sowie für eventuelle Überschreitungen von Quoten deines
+                Google-Kontos.
+              </p>
+              <p>
+                <strong>Markenhinweis:</strong>
+                Amazon, Alexa und alle damit verbundenen Logos sind Marken von
+                Amazon.com, Inc. Google und Gemini sind Marken von Google LLC.
+                Dieses Projekt steht in keiner offiziellen Verbindung zu Amazon
+                oder Google.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <div class="footer-links">
+          <a
+            href="#datenschutz"
+            id="footerPrivacyLink"
+            class="footer-link"
+            data-i18n="footer_privacy"
+            >Datenschutz</a
+          >
+          <span class="footer-dot">•</span>
+          <a
+            href="#nutzungsbedingungen"
+            id="footerTermsLink"
+            class="footer-link"
+            data-i18n="footer_terms"
+            >Nutzungsbedingungen</a
+          >
+          <span class="footer-dot">•</span>
+          <a
+            href="https://github.com/niilz/schlaubi-schlumpf-apikey-setup"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-link"
+            >GitHub ↗</a
+          >
         </div>
-      </section>
+        <p class="footer-copy">
+          Schlaubi Schlumpf &bull; Gemini AI Connector für Amazon Alexa
+        </p>
+      </footer>
+    </div>
 
-      <!-- Panel 3: Privacy Policy (Datenschutz) & Terms (Required for Amazon Certification) -->
-      <section id="privacyPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabPrivacyBtn">
-        <div class="panel-intro">
-          <h2 class="panel-title" data-i18n="privacy_title">Datenschutzerklärung & Nutzungsbedingungen</h2>
-          <p class="panel-subtitle" data-i18n="privacy_subtitle">
-            Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Schlaubi Schlumpf.
-          </p>
-        </div>
-
-        <div class="legal-content">
-          <article class="legal-article" id="datenschutz">
-            <h3 class="legal-heading" data-i18n="legal_privacy_h3">1. Datenschutzerklärung (Privacy Policy)</h3>
-            <p>
-              <strong>Verantwortlicher:</strong> Betreiber des Open-Source Alexa Skills "Schlaubi Schlumpf".
-            </p>
-            <p>
-              <strong>Erhebung und Speicherung des API-Keys:</strong>
-              Diese Webanwendung wird über GitHub Pages bereitgestellt. Sie verarbeitet keine Formulardaten auf einem Webserver, betreibt keine Backend-Datenbank und speichert keine Cookies oder Analyse-Daten.
-            </p>
-            <p>
-              <strong>Übertragung via OAuth 2.0 Implicit Grant:</strong>
-              Wenn du deinen Google Gemini API-Key in das Formular eingibst und auf "Mit Alexa verknüpfen" klickst, wird der Schlüssel als Access-Token im URI-Fragment (<code>#access_token=...</code>) verschlüsselt über HTTPS direkt an den Amazon Alexa Autorisierungsserver übertragen. Gemäß der RFC-6749 Spezifikation verbleibt der Fragment-Teil einer URL im Webclient und wird zu keinem Zeitpunkt an unsere Webserver gesendet.
-            </p>
-            <p>
-              <strong>Nutzung im Alexa Skill:</strong>
-              Amazon Alexa speichert den Access-Token sicher im Kontext deines verknüpften Alexa-Benutzerkontos. Bei jeder Sprachanfrage an den Skill "Schlaubi Schlumpf" übergibt Amazon den Access-Token an die AWS Lambda-Funktion des Skills. Die Lambda-Funktion verwendet den API-Key ausschließlich dafür, deine Sprachanfrage an die Google Gemini API weiterzuleiten und die generierte Antwort an dein Alexa-Gerät zurückzugeben.
-            </p>
-            <p>
-              <strong>Widerruf & Löschung:</strong>
-              Du kannst die Verknüpfung jederzeit mit sofortiger Wirkung in der Amazon Alexa App unter <em>Skills & Spiele &rarr; Schlaubi Schlumpf &rarr; Einstellungen &rarr; Konto trennen</em> aufheben. Alternativ kannst du den API-Key direkt im <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> löschen oder sperren.
-            </p>
-          </article>
-
-          <article class="legal-article" id="nutzungsbedingungen">
-            <h3 class="legal-heading" data-i18n="legal_terms_h3">2. Nutzungsbedingungen (Terms of Use)</h3>
-            <p>
-              Der Alexa Skill "Schlaubi Schlumpf" ist eine Schnittstelle zur Nutzung von Googles generativen Sprachmodellen auf Amazon-Echo-Geräten.
-            </p>
-            <p>
-              <strong>Eigener API-Key:</strong>
-              Die Nutzung setzt einen gültigen Google Gemini API-Key voraus, der den Nutzungsbedingungen von Google AI Studio unterliegt.
-            </p>
-            <p>
-              <strong>Haftungsausschluss:</strong>
-              Künstliche Intelligenzen können fehlerhafte, unvollständige oder irreführende Antworten generieren. Der Betreiber übernimmt keine Haftung für die Richtigkeit der von Gemini generierten Antworten sowie für eventuelle Überschreitungen von Quoten deines Google-Kontos.
-            </p>
-            <p>
-              <strong>Markenhinweis:</strong>
-              Amazon, Alexa und alle damit verbundenen Logos sind Marken von Amazon.com, Inc. Google und Gemini sind Marken von Google LLC. Dieses Projekt steht in keiner offiziellen Verbindung zu Amazon oder Google.
-            </p>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <!-- App Footer -->
-    <footer class="app-footer">
-      <div class="footer-links">
-        <a href="#datenschutz" id="footerPrivacyLink" class="footer-link" data-i18n="footer_privacy">Datenschutz</a>
-        <span class="footer-dot">•</span>
-        <a href="#nutzungsbedingungen" id="footerTermsLink" class="footer-link" data-i18n="footer_terms">Nutzungsbedingungen</a>
-        <span class="footer-dot">•</span>
-        <a href="https://github.com/niilz/schlaubi-schlumpf-apikey-setup" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a>
-      </div>
-      <p class="footer-copy">
-        Schlaubi Schlumpf &bull; Gemini AI Connector für Amazon Alexa
-      </p>
-    </footer>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

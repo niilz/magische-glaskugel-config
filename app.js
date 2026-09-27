@@ -363,7 +363,8 @@
         showFeedback('success', t('test_valid_heading'), t('test_valid_text'))
       } else {
         const errorMsg =
-          data?.error?.message || `HTTP ${response.status}: ${response.statusText}`
+          data?.error?.message ||
+          `HTTP ${response.status}: ${response.statusText}`
         showFeedback('error', t('test_invalid_heading'), errorMsg)
       }
     } catch (err) {

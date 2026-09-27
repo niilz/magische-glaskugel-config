@@ -33,6 +33,7 @@ sequenceDiagram
 ```
 
 ### Die großen Vorteile dieses Ansatzes:
+
 1. **Zero-Database & Zero-Server:** Es wird keine externe Datenbank (DynamoDB, Firebase etc.) benötigt. Amazon speichert den API-Key für jeden Nutzer verschlüsselt und liefert ihn automatisch bei jedem Aufruf im Request mit.
 2. **100 % Client-Side & Sicher:** Die gesamte GitHub Pages Seite läuft statisch im Browser des Nutzers. Über das URL-Fragment (`#access_token=...`) gelangt der Key direkt zu Amazon und berührt zu keinem Zeitpunkt fremde Server.
 3. **Vollständige Zertifizierungs-Konformität:** Integrierte Datenschutzerklärung (`#datenschutz`) und Nutzungsbedingungen (`#nutzungsbedingungen`) erfüllen direkt die Anforderungen für den Amazon Alexa Skill Store.
@@ -64,14 +65,14 @@ sequenceDiagram
 3. Aktiviere den Schalter:
    - **Do you allow users to create an account or link to an existing account with you?** &rarr; **Yes**.
 4. Wähle als Grant-Typ:
-   - 🔘 **Implicit Grant** *(wichtig: nicht "Auth Code Grant")*.
+   - 🔘 **Implicit Grant** _(wichtig: nicht "Auth Code Grant")_.
 5. Trage folgende Werte ein:
    - **Authorization URI**:  
      `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/`
    - **Client ID**:  
-     `alexa-schlaubi-schlumpf` *(beliebiger Bezeichner)*
+     `alexa-schlaubi-schlumpf` _(beliebiger Bezeichner)_
    - **Scopes**:  
-     `gemini` *(oder leer lassen)*
+     `gemini` _(oder leer lassen)_
    - **Domains**:  
      `<dein-github-benutzername>.github.io`
 6. Klicke oben rechts auf **Save**.
@@ -98,52 +99,59 @@ Bisher hatte dein Skill einen fest einprogrammierten API-Key. Ersetze diesen dur
 ### Beispiel in TypeScript:
 
 ```typescript
-import { HandlerInput, RequestHandler } from 'ask-sdk-core';
-import { Response, IntentRequest } from 'ask-sdk-model';
+import { HandlerInput, RequestHandler } from 'ask-sdk-core'
+import { Response, IntentRequest } from 'ask-sdk-model'
 
 export const AskGeminiIntentHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput): boolean {
     return (
       handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
       handlerInput.requestEnvelope.request.intent.name === 'AskGeminiIntent'
-    );
+    )
   },
 
   async handle(handlerInput: HandlerInput): Promise<Response> {
     // 1. Hole den verknüpften API-Key (accessToken) aus dem Kontext
-    const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+    const accessToken =
+      handlerInput.requestEnvelope.context.System.user.accessToken
 
     // 2. Falls noch nicht verknüpft: Fordere den Nutzer mit einer Karte auf
     if (!accessToken) {
-      return handlerInput.responseBuilder
-        .speak('Hallo! Um Schlaubi Schlumpf zu nutzen, verknüpfe bitte zuerst deinen Google Gemini API-Key in der Alexa-App.')
-        // withLinkAccountCard erzeugt die "Konto verknüpfen" Schaltfläche in der Alexa-App
-        .withLinkAccountCard()
-        .getResponse();
+      return (
+        handlerInput.responseBuilder
+          .speak(
+            'Hallo! Um Schlaubi Schlumpf zu nutzen, verknüpfe bitte zuerst deinen Google Gemini API-Key in der Alexa-App.',
+          )
+          // withLinkAccountCard erzeugt die "Konto verknüpfen" Schaltfläche in der Alexa-App
+          .withLinkAccountCard()
+          .getResponse()
+      )
     }
 
-    const request = handlerInput.requestEnvelope.request as IntentRequest;
-    const question = request.intent.slots?.question?.value || 'Erzähle mir einen Witz.';
+    const request = handlerInput.requestEnvelope.request as IntentRequest
+    const question =
+      request.intent.slots?.question?.value || 'Erzähle mir einen Witz.'
 
     try {
       // 3. Verwende den individuellen Key des Nutzers für den Gemini-Aufruf
-      const answer = await queryGemini(question, accessToken);
+      const answer = await queryGemini(question, accessToken)
       return handlerInput.responseBuilder
         .speak(`<lang xml:lang="de-DE">Schlaubi sagt:</lang> ${answer}`)
-        .getResponse();
-
+        .getResponse()
     } catch (error: any) {
       // Falls der Key ungültig oder widerrufen wurde:
       if (error?.status === 400 || error?.status === 403) {
         return handlerInput.responseBuilder
-          .speak('Dein hinterlegter Google API-Key ist leider ungültig. Bitte hinterlege einen neuen Schlüssel in der Alexa-App.')
+          .speak(
+            'Dein hinterlegter Google API-Key ist leider ungültig. Bitte hinterlege einen neuen Schlüssel in der Alexa-App.',
+          )
           .withLinkAccountCard()
-          .getResponse();
+          .getResponse()
       }
-      throw error;
+      throw error
     }
-  }
-};
+  },
+}
 ```
 
 Ein vollständiges, sofort einsatzbereites TypeScript-Beispiel findest du in [`examples/lambda-handler-example.ts`](file:///workspaces/schlaubi-schlumpf-apikey-setup/examples/lambda-handler-example.ts).
@@ -153,16 +161,21 @@ Ein vollständiges, sofort einsatzbereites TypeScript-Beispiel findest du in [`e
 ## 🧪 Lokale Entwicklung & Tests
 
 ### 1. Lokal im Browser öffnen
+
 Starte einen lokalen Webserver:
+
 ```bash
 python3 -m http.server 8000
 ```
+
 Öffne `http://localhost:8000` im Browser.
 
 ### 2. Entwickler- & Simulations-Modus nutzen
+
 Wenn die Seite direkt im Browser aufgerufen wird (ohne von Alexa geöffnet worden zu sein), zeigt die App automatisch einen Hinweis an.
 
 Unten auf der Seite findest du den Link **🛠️ Entwickler- & Test-Modus**:
+
 1. Klicke auf **Entwickler- & Test-Modus**.
 2. Es werden simulierte Parameter für `redirect_uri` und `state` eingeblendet.
 3. Du kannst einen Key eingeben, auf **Key testen** klicken (prüft echten Gemini-Zugriff) und die erzeugte Weiterleitungs-URL inspizieren.
@@ -186,6 +199,7 @@ schlaubi-schlumpf-apikey-setup/
 ---
 
 ## 🔒 Datenschutz & Sicherheit
+
 - **Keine Server:** Keine Benutzerdaten, Cookies oder API-Keys werden auf GitHub Pages oder fremden Webservern gespeichert.
 - **RFC 6749 Konformität:** Die Übertragung des Tokens erfolgt im URI-Fragment (`#access_token=...`), welches laut HTTP-Spezifikation vom Browser niemals an Webserver übertragen wird.
 - **Widerruf:** Nutzer können ihren API-Key jederzeit mit einem Klick in der Alexa App trennen oder in Google AI Studio löschen.

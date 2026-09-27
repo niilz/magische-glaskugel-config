@@ -27,12 +27,14 @@ export const AskGeminiIntentHandler: RequestHandler = {
       const speechText =
         'Hallo! Um Schlaubi Schlumpf nutzen zu können, hinterlege bitte zuerst deinen persönlichen Google Gemini API-Key in der Alexa-App.'
 
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        // withLinkAccountCard() sends an interactive card to the user's Alexa App
-        // with a direct button "Konto verknüpfen" that opens your GitHub Pages site!
-        .withLinkAccountCard()
-        .getResponse()
+      return (
+        handlerInput.responseBuilder
+          .speak(speechText)
+          // withLinkAccountCard() sends an interactive card to the user's Alexa App
+          // with a direct button "Konto verknüpfen" that opens your GitHub Pages site!
+          .withLinkAccountCard()
+          .getResponse()
+      )
     }
 
     // 3. Extract the spoken question from the intent slot
