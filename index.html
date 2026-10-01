@@ -200,7 +200,7 @@
           </div>
 
           <form id="authForm" class="auth-form" novalidate>
-            <!-- Provider Selection -->
+            <!-- 1. Provider Selection -->
             <div class="input-group">
               <label
                 for="providerSelect"
@@ -224,26 +224,7 @@
               </select>
             </div>
 
-            <!-- Model Selection -->
-            <div class="input-group">
-              <label
-                for="modelSelect"
-                class="form-label"
-                data-i18n="label_model"
-                >Modell</label
-              >
-              <select id="modelSelect" class="form-select" disabled required>
-                <option
-                  value=""
-                  disabled
-                  selected
-                  data-i18n="opt_select_model_first"
-                >
-                  -- Zuerst Anbieter wählen --
-                </option>
-              </select>
-            </div>
-
+            <!-- 2. API-Key Input -->
             <div class="input-group">
               <div class="label-row">
                 <label
@@ -359,23 +340,13 @@
               </div>
             </div>
 
-            <!-- Live Key Testing Feedback Box -->
-            <div
-              id="testFeedback"
-              class="feedback-card hidden"
-              role="alert"
-              aria-live="assertive"
-            >
-              <div class="feedback-icon" id="feedbackIcon"></div>
-              <div class="feedback-content">
-                <strong id="feedbackHeading"></strong>
-                <p id="feedbackText"></p>
-              </div>
-            </div>
-
-            <!-- Buttons Group -->
-            <div class="button-group">
-              <button type="button" id="testKeyBtn" class="btn btn-secondary">
+            <!-- 3. Testen und Modelle laden Button -->
+            <div class="test-btn-wrapper">
+              <button
+                type="button"
+                id="testKeyBtn"
+                class="btn btn-secondary btn-full"
+              >
                 <svg
                   class="btn-icon"
                   viewBox="0 0 24 24"
@@ -396,8 +367,115 @@
                 >
                 <span class="spinner hidden" id="testSpinner"></span>
               </button>
+            </div>
 
-              <button type="submit" id="submitBtn" class="btn btn-primary">
+            <!-- 4. Zwei Checks (API-Key Check & Modelle Check) -->
+            <div
+              id="checksFeedback"
+              class="checks-card hidden"
+              role="alert"
+              aria-live="polite"
+            >
+              <div class="check-item" id="keyCheckItem">
+                <span class="check-icon" id="keyCheckIcon">⏳</span>
+                <div class="check-content">
+                  <strong class="check-title" id="keyCheckTitle"
+                    >API-Key:</strong
+                  >
+                  <span class="check-desc" id="keyCheckDesc"
+                    >Wird geprüft...</span
+                  >
+                </div>
+              </div>
+              <div class="check-item" id="modelsCheckItem">
+                <span class="check-icon" id="modelsCheckIcon">⏳</span>
+                <div class="check-content">
+                  <strong class="check-title" id="modelsCheckTitle"
+                    >Modelle:</strong
+                  >
+                  <span class="check-desc" id="modelsCheckDesc"
+                    >Werden geladen...</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Generic Feedback Box for general errors -->
+            <div
+              id="testFeedback"
+              class="feedback-card hidden"
+              role="alert"
+              aria-live="assertive"
+            >
+              <div class="feedback-icon" id="feedbackIcon"></div>
+              <div class="feedback-content">
+                <strong id="feedbackHeading"></strong>
+                <p id="feedbackText"></p>
+              </div>
+            </div>
+
+            <!-- 5. Model Selection (Dropdown or Manual Input) -->
+            <div class="input-group" id="modelGroup">
+              <div class="label-row">
+                <label
+                  for="modelSelect"
+                  class="form-label"
+                  data-i18n="label_model"
+                  >Modell</label
+                >
+                <button
+                  type="button"
+                  id="toggleManualModelBtn"
+                  class="text-link-subtle"
+                  style="font-size: 0.8rem"
+                  data-i18n="btn_manual_model"
+                >
+                  Modell manuell eingeben
+                </button>
+              </div>
+
+              <div id="modelSelectWrapper">
+                <select id="modelSelect" class="form-select" disabled required>
+                  <option
+                    value=""
+                    disabled
+                    selected
+                    data-i18n="opt_select_model_locked"
+                  >
+                    -- Bitte zuerst API-Key testen und Modelle laden --
+                  </option>
+                </select>
+              </div>
+
+              <div
+                id="customModelWrapper"
+                class="hidden"
+                style="margin-top: 6px"
+              >
+                <input
+                  type="text"
+                  id="customModelInput"
+                  class="form-input"
+                  placeholder="z. B. gemini-1.5-flash oder gpt-4o-mini"
+                  spellcheck="false"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="off"
+                />
+                <div class="input-hint" style="margin-top: 4px">
+                  <span class="hint-bullet">•</span>
+                  <span>Exakter Modellname des gewählten Anbieters</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Submit Button -->
+            <div class="submit-wrapper">
+              <button
+                type="submit"
+                id="submitBtn"
+                class="btn btn-primary btn-full"
+              >
                 <span class="btn-text" data-i18n="btn_link_alexa"
                   >Mit Alexa verknüpfen</span
                 >

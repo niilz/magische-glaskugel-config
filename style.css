@@ -661,6 +661,74 @@ body {
 }
 
 /* ==========================================================================
+   Two-Step Verification Checks Card
+   ========================================================================== */
+
+.checks-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-subtle);
+  animation: slideDown 200ms ease;
+  margin-top: 4px;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.check-icon {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.check-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.check-title {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.check-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.check-item.success .check-title,
+.check-item.success .check-desc {
+  color: var(--status-success-text);
+}
+
+.check-item.error .check-title,
+.check-item.error .check-desc {
+  color: var(--status-error-text);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.test-btn-wrapper {
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.submit-wrapper {
+  margin-top: 8px;
+}
+
+/* ==========================================================================
    Buttons
    ========================================================================== */
 

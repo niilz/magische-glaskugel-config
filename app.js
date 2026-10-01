@@ -52,10 +52,23 @@
       footer_privacy: 'Datenschutz',
       footer_terms: 'Nutzungsbedingungen',
       opt_select_provider: '-- Anbieter wählen --',
+      opt_select_model_locked:
+        '-- Bitte zuerst API-Key testen und Modelle laden --',
       opt_select_model_first: '-- Zuerst Anbieter wählen --',
       opt_select_model: '-- Modell auswählen --',
+      opt_custom_model: '✏️ Eigenes Modell manuell eingeben...',
+      btn_manual_model: 'Modell manuell eingeben',
+      btn_select_from_list: 'Aus Liste wählen',
+      check_key_title: 'API-Key:',
+      check_key_testing: 'Wird geprüft...',
+      check_key_valid: 'API-Key ist gültig und aktiv',
+      check_key_invalid: 'API-Key ist ungültig',
+      check_models_title: 'Modelle:',
+      check_models_testing: 'Werden geladen...',
+      check_models_loaded: 'Modelle erfolgreich geladen',
+      check_models_failed: 'Modelle konnten nicht geladen werden',
       error_no_provider: 'Bitte wähle zuerst einen KI-Anbieter aus.',
-      error_no_model: 'Bitte wähle ein Modell aus.',
+      error_no_model: 'Bitte wähle ein Modell aus oder gib eines manuell ein.',
       error_incomplete:
         'Bitte fülle alle Pflichtfelder aus (Anbieter, Modell und API-Key).',
       error_no_key: 'Bitte gib deinen API-Key ein.',
@@ -117,10 +130,22 @@
       footer_terms: 'Terms of Use',
       // Notifications
       opt_select_provider: '-- Select Provider --',
+      opt_select_model_locked: '-- Please test API key & load models first --',
       opt_select_model_first: '-- Select provider first --',
       opt_select_model: '-- Select a model --',
+      opt_custom_model: '✏️ Enter custom model manually...',
+      btn_manual_model: 'Enter model manually',
+      btn_select_from_list: 'Select from list',
+      check_key_title: 'API Key:',
+      check_key_testing: 'Checking...',
+      check_key_valid: 'API key is valid and active',
+      check_key_invalid: 'API key is invalid',
+      check_models_title: 'Models:',
+      check_models_testing: 'Loading...',
+      check_models_loaded: 'models successfully loaded',
+      check_models_failed: 'Models could not be loaded',
       error_no_provider: 'Please select an AI provider first.',
-      error_no_model: 'Please select a model.',
+      error_no_model: 'Please select a model or enter one manually.',
       error_incomplete:
         'Please fill in all fields (provider, model, and API key).',
       error_no_key: 'Please enter your API key.',
@@ -410,6 +435,8 @@
   // State
   let currentLang = 'de'
   let currentTheme = 'system'
+  let isManualModel = false
+  let modelsLoaded = false
   let authParams = {
     redirectUri: null,
     state: null,
@@ -421,6 +448,10 @@
   const authForm = document.getElementById('authForm')
   const providerSelect = document.getElementById('providerSelect')
   const modelSelect = document.getElementById('modelSelect')
+  const modelSelectWrapper = document.getElementById('modelSelectWrapper')
+  const customModelWrapper = document.getElementById('customModelWrapper')
+  const customModelInput = document.getElementById('customModelInput')
+  const toggleManualModelBtn = document.getElementById('toggleManualModelBtn')
   const apiKeyLabel = document.getElementById('apiKeyLabel')
   const getKeyLink = document.getElementById('getKeyLink')
   const formatHint = document.getElementById('formatHint')
@@ -437,6 +468,15 @@
   const feedbackHeading = document.getElementById('feedbackHeading')
   const feedbackText = document.getElementById('feedbackText')
   const feedbackIcon = document.getElementById('feedbackIcon')
+  const checksFeedback = document.getElementById('checksFeedback')
+  const keyCheckItem = document.getElementById('keyCheckItem')
+  const keyCheckIcon = document.getElementById('keyCheckIcon')
+  const keyCheckTitle = document.getElementById('keyCheckTitle')
+  const keyCheckDesc = document.getElementById('keyCheckDesc')
+  const modelsCheckItem = document.getElementById('modelsCheckItem')
+  const modelsCheckIcon = document.getElementById('modelsCheckIcon')
+  const modelsCheckTitle = document.getElementById('modelsCheckTitle')
+  const modelsCheckDesc = document.getElementById('modelsCheckDesc')
 
   // Theme & Lang Elements
   const langToggleBtn = document.getElementById('langToggleBtn')
@@ -576,6 +616,74 @@
   }
 
   /**
+   * Set state of the two-step verification checks
+   */
+  function setChecksStatus(keyStatus, modelsStatus) {
+    if (!checksFeedback) return
+
+    if (!keyStatus && !modelsStatus) {
+      checksFeedback.classList.add('hidden')
+      return
+    }
+
+    checksFeedback.classList.remove('hidden')
+
+    if (keyStatus) {
+      keyCheckItem.className = `check-item ${keyStatus.state}`
+      keyCheckIcon.textContent =
+        keyStatus.state === 'success'
+          ? '✅'
+          : keyStatus.state === 'error'
+            ? '❌'
+            : '⏳'
+      keyCheckTitle.textContent = t('check_key_title')
+      keyCheckDesc.textContent = keyStatus.text
+    }
+
+    if (modelsStatus) {
+      modelsCheckItem.className = `check-item ${modelsStatus.state}`
+      modelsCheckIcon.textContent =
+        modelsStatus.state === 'success'
+          ? '✅'
+          : modelsStatus.state === 'error'
+            ? '❌'
+            : '⏳'
+      modelsCheckTitle.textContent = t('check_models_title')
+      modelsCheckDesc.textContent = modelsStatus.text
+    }
+  }
+
+  /**
+   * Toggle between select dropdown and manual model input
+   */
+  function toggleManualModel(forceManual) {
+    if (typeof forceManual === 'boolean') {
+      isManualModel = forceManual
+    } else {
+      isManualModel = !isManualModel
+    }
+
+    if (isManualModel) {
+      customModelWrapper?.classList.remove('hidden')
+      modelSelectWrapper?.classList.add('hidden')
+      if (toggleManualModelBtn) {
+        toggleManualModelBtn.textContent = t('btn_select_from_list')
+      }
+      customModelInput?.focus()
+    } else {
+      customModelWrapper?.classList.add('hidden')
+      modelSelectWrapper?.classList.remove('hidden')
+      if (toggleManualModelBtn) {
+        toggleManualModelBtn.textContent = t('btn_manual_model')
+      }
+      if (modelSelect && modelSelect.value === '__custom__') {
+        modelSelect.selectedIndex = 0
+      }
+    }
+    updateDevPreview()
+  }
+
+  /**
    * Render model options into modelSelect dropdown
    */
   function renderModelOptions(models, selectedId = null) {
@@ -592,6 +700,13 @@
       }
       modelSelect.appendChild(opt)
     })
+
+    // Always add option to enter model manually
+    const customOpt = document.createElement('option')
+    customOpt.value = '__custom__'
+    customOpt.textContent = t('opt_custom_model')
+    modelSelect.appendChild(customOpt)
+
     updateDevPreview()
   }
 
@@ -600,24 +715,32 @@
    */
   function updateProviderUI() {
     const providerKey = providerSelect?.value
+    setChecksStatus(null, null)
+    hideFeedback()
+
     if (!providerKey || !PROVIDERS[providerKey]) {
       if (modelSelect) {
         modelSelect.disabled = true
-        modelSelect.innerHTML = `<option value="" disabled selected>${t('opt_select_model_first')}</option>`
+        modelSelect.innerHTML = `<option value="" disabled selected>${t('opt_select_model_locked')}</option>`
       }
       if (apiKeyLabel) apiKeyLabel.textContent = t('label_api_key')
       if (getKeyLink) getKeyLink.removeAttribute('href')
       if (apiKeyInput) apiKeyInput.placeholder = 'API-Key eingeben...'
       if (formatHint) formatHint.innerHTML = ''
+      toggleManualModel(false)
       updateDevPreview()
       return
     }
 
     const prov = PROVIDERS[providerKey]
 
+    // Lock models until user clicks test button!
+    modelsLoaded = false
     if (modelSelect) {
-      renderModelOptions(prov.models)
+      modelSelect.disabled = true
+      modelSelect.innerHTML = `<option value="" disabled selected>${t('opt_select_model_locked')}</option>`
     }
+    toggleManualModel(false)
 
     if (apiKeyLabel) {
       apiKeyLabel.textContent = prov.keyLabel
@@ -632,36 +755,6 @@
       formatHint.innerHTML = `<span class="hint-bullet">•</span> <span>${prov.formatHint}</span>`
     }
     updateDevPreview()
-  }
-
-  /**
-   * Build base64-encoded token containing provider, model, apiKey, and displayName
-   */
-  function buildTokenPayload(apiKey) {
-    const provider = providerSelect?.value
-    const model = modelSelect?.value
-    if (!provider || !model || !apiKey) {
-      return null
-    }
-
-    const prov = PROVIDERS[provider]
-    const selectedOption = modelSelect?.options[modelSelect?.selectedIndex]
-    const displayName =
-      selectedOption?.getAttribute('data-display-name') ||
-      prov?.defaultDisplayName ||
-      'KI'
-
-    const payload = {
-      provider,
-      model,
-      apiKey,
-      displayName,
-    }
-
-    const jsonStr = JSON.stringify(payload)
-    // Base64 encoding with UTF-8 support
-    const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
-    return `cfg_${base64}`
   }
 
   /**
@@ -690,27 +783,46 @@
     testKeyBtn.querySelector('.btn-text').textContent = t('btn_testing')
     hideFeedback()
 
+    // Show initial checks state
+    setChecksStatus(
+      { state: 'testing', text: t('check_key_testing') },
+      { state: 'testing', text: t('check_models_testing') },
+    )
+
     try {
-      const currentSelected = modelSelect?.value
       const liveModels = await prov.loadModels(apiKey)
       if (liveModels && liveModels.length > 0) {
-        renderModelOptions(liveModels, currentSelected || liveModels[0].id)
-        showFeedback(
-          'success',
-          t('test_valid_heading'),
-          t('test_models_loaded')
-            .replace('{count}', liveModels.length)
-            .replace('{provider}', prov.name),
+        modelsLoaded = true
+        setChecksStatus(
+          { state: 'success', text: t('check_key_valid') },
+          {
+            state: 'success',
+            text: `${liveModels.length} ${t('check_models_loaded')}`,
+          },
         )
+        renderModelOptions(liveModels, liveModels[0].id)
+        toggleManualModel(false)
       } else {
-        showFeedback('success', t('test_valid_heading'), t('test_valid_text'))
+        modelsLoaded = false
+        setChecksStatus(
+          { state: 'success', text: t('check_key_valid') },
+          { state: 'error', text: t('check_models_failed') },
+        )
+        // Automatically switch to manual input if no models could be loaded
+        toggleManualModel(true)
       }
     } catch (err) {
-      showFeedback(
-        'error',
-        `${prov.name} API-Fehler`,
-        err.message || 'Verbindung fehlgeschlagen',
+      modelsLoaded = false
+      setChecksStatus(
+        {
+          state: 'error',
+          text: `${t('check_key_invalid')} (${err.message || 'Fehler'})`,
+        },
+        { state: 'error', text: t('check_models_failed') },
       )
+      if (modelSelect) {
+        modelSelect.disabled = true
+      }
     } finally {
       testKeyBtn.disabled = false
       testSpinner.classList.add('hidden')
@@ -719,13 +831,56 @@
   }
 
   /**
+   * Build base64-encoded token containing provider, model, apiKey, and displayName
+   */
+  function buildTokenPayload(apiKey) {
+    const provider = providerSelect?.value
+    let model = ''
+    if (isManualModel || modelSelect?.value === '__custom__') {
+      model = customModelInput?.value?.trim() || ''
+    } else {
+      model = modelSelect?.value || ''
+    }
+
+    if (!provider || !model || !apiKey) {
+      return null
+    }
+
+    const prov = PROVIDERS[provider]
+    let displayName = prov?.defaultDisplayName || 'KI'
+    if (!isManualModel && modelSelect?.selectedIndex >= 0) {
+      const selectedOption = modelSelect.options[modelSelect.selectedIndex]
+      displayName =
+        selectedOption?.getAttribute('data-display-name') || displayName
+    }
+
+    const payload = {
+      provider,
+      model,
+      apiKey,
+      displayName,
+    }
+
+    const jsonStr = JSON.stringify(payload)
+    // Base64 encoding with UTF-8 support
+    const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
+    return `cfg_${base64}`
+  }
+
+  /**
    * Handle OAuth Form Submission
    */
   function handleFormSubmit(e) {
     e.preventDefault()
     const provider = providerSelect?.value
-    const model = modelSelect?.value
     const apiKey = getSanitizedKey()
+
+    let model = ''
+    if (isManualModel || modelSelect?.value === '__custom__') {
+      model = customModelInput?.value?.trim() || ''
+    } else {
+      model = modelSelect?.value || ''
+    }
 
     if (!provider) {
       showFeedback('error', t('error_no_provider'), '')
@@ -733,15 +888,19 @@
       return
     }
 
-    if (!model) {
-      showFeedback('error', t('error_no_model'), '')
-      modelSelect?.focus()
-      return
-    }
-
     if (!apiKey) {
       showFeedback('error', t('error_no_key'), '')
       apiKeyInput.focus()
+      return
+    }
+
+    if (!model) {
+      showFeedback('error', t('error_no_model'), '')
+      if (isManualModel) {
+        customModelInput?.focus()
+      } else {
+        modelSelect?.focus()
+      }
       return
     }
 
@@ -934,6 +1093,20 @@
     }
     if (modelSelect) {
       modelSelect.addEventListener('change', () => {
+        if (modelSelect.value === '__custom__') {
+          toggleManualModel(true)
+        } else {
+          updateDevPreview()
+        }
+      })
+    }
+    if (toggleManualModelBtn) {
+      toggleManualModelBtn.addEventListener('click', () => {
+        toggleManualModel()
+      })
+    }
+    if (customModelInput) {
+      customModelInput.addEventListener('input', () => {
         updateDevPreview()
       })
     }
