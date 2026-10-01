@@ -160,11 +160,6 @@
           name: 'Gemini 2.0 Flash Lite',
           displayName: 'Gemini',
         },
-        {
-          id: 'gemini-1.5-pro',
-          name: 'Gemini 1.5 Pro',
-          displayName: 'Gemini',
-        },
       ],
       testKey: async (apiKey) => {
         const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}&pageSize=1`
@@ -191,11 +186,6 @@
           displayName: 'ChatGPT',
         },
         { id: 'gpt-4o', name: 'GPT-4o', displayName: 'ChatGPT' },
-        {
-          id: 'gpt-3.5-turbo',
-          name: 'GPT-3.5 Turbo',
-          displayName: 'ChatGPT',
-        },
       ],
       testKey: async (apiKey) => {
         const res = await fetch('https://api.openai.com/v1/models', {
