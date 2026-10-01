@@ -99,16 +99,6 @@
 
       <!-- Main Card Container -->
       <main class="main-card">
-        <!-- Session Status Banner -->
-        <div
-          id="sessionBanner"
-          class="session-banner"
-          role="status"
-          aria-live="polite"
-        >
-          <!-- Dynamically rendered: Connected / Direct visit alert -->
-        </div>
-
         <!-- Tab Navigation -->
         <nav class="nav-tabs" role="tablist" aria-label="Hauptnavigation">
           <button
@@ -374,22 +364,6 @@
             </div>
           </form>
 
-          <!-- Privacy & Security Highlight Box -->
-          <aside class="security-callout">
-            <div class="security-callout-header">
-              <span class="security-badge-icon" aria-hidden="true">🛡️</span>
-              <strong data-i18n="security_title"
-                >Zero-Server Datenschutzgarantie</strong
-              >
-            </div>
-            <p data-i18n="security_desc">
-              Diese Seite läuft zu 100 % in deinem Browser auf GitHub Pages.
-              Dein Schlüssel wird ausschließlich verschlüsselt im URL-Fragment
-              direkt an Amazon Alexa übertragen. Es existiert keine Datenbank
-              und kein Zwischenserver.
-            </p>
-          </aside>
-
           <!-- Developer Mode Toggle Link (Discreet) -->
           <div class="dev-mode-link-wrapper">
             <button
@@ -547,13 +521,16 @@
 
           <div class="faq-box">
             <h3 class="faq-title" data-i18n="faq_cost_title">
-              💰 Ist das wirklich kostenlos?
+              💰 Ist das kostenlos?
             </h3>
             <p data-i18n="faq_cost_desc">
-              Ja! Google bietet für Gemini 1.5 Flash und verwandte Modelle im
-              <strong>Free Tier</strong> bis zu 15 Anfragen pro Minute und 1.500
-              Anfragen pro Tag völlig kostenfrei an. Für die alltägliche Nutzung
-              mit Alexa ist dieses Kontingent mehr als ausreichend.
+              Google stellt für Gemini im <strong>Free Tier</strong> ein
+              kostenloses Kontingent bereit (z. B. bis zu 15 Anfragen/Min).
+              Solange du den Free Tier nutzt, ist die Verwendung komplett
+              kostenlos. Falls du ein kostenpflichtiges Google Cloud
+              Abrechnungskonto verknüpft hast oder das Kontingent
+              überschreitest, fallen die regulären Kosten des Anbieters (Google)
+              an.
             </p>
           </div>
         </section>
@@ -581,52 +558,34 @@
                 1. Datenschutzerklärung (Privacy Policy)
               </h3>
               <p>
-                <strong>Verantwortlicher:</strong> Betreiber des Open-Source
-                Alexa Skills "Schlaubi Schlumpf".
+                <strong>Verarbeitung des API-Keys:</strong>
+                Diese Webseite verarbeitet deine Eingaben direkt im Browser. Der
+                eingegebene API-Key wird bei Klick auf "Mit Alexa verknüpfen" an
+                den Amazon Alexa Autorisierungsserver übergeben und dort mit
+                deinem Alexa-Konto verknüpft.
               </p>
               <p>
-                <strong>Erhebung und Speicherung des API-Keys:</strong>
-                Diese Webanwendung wird über GitHub Pages bereitgestellt. Sie
-                verarbeitet keine Formulardaten auf einem Webserver, betreibt
-                keine Backend-Datenbank und speichert keine Cookies oder
-                Analyse-Daten.
-              </p>
-              <p>
-                <strong>Übertragung via OAuth 2.0 Implicit Grant:</strong>
-                Wenn du deinen Google Gemini API-Key in das Formular eingibst
-                und auf "Mit Alexa verknüpfen" klickst, wird der Schlüssel als
-                Access-Token im URI-Fragment (<code>#access_token=...</code>)
-                verschlüsselt über HTTPS direkt an den Amazon Alexa
-                Autorisierungsserver übertragen. Gemäß der RFC-6749
-                Spezifikation verbleibt der Fragment-Teil einer URL im Webclient
-                und wird zu keinem Zeitpunkt an unsere Webserver gesendet.
-              </p>
-              <p>
-                <strong>Nutzung im Alexa Skill:</strong>
-                Amazon Alexa speichert den Access-Token sicher im Kontext deines
-                verknüpften Alexa-Benutzerkontos. Bei jeder Sprachanfrage an den
-                Skill "Schlaubi Schlumpf" übergibt Amazon den Access-Token an
-                die AWS Lambda-Funktion des Skills. Die Lambda-Funktion
-                verwendet den API-Key ausschließlich dafür, deine Sprachanfrage
-                an die Google Gemini API weiterzuleiten und die generierte
-                Antwort an dein Alexa-Gerät zurückzugeben.
+                <strong>Nutzung im Skill:</strong>
+                Bei Anfragen an den Alexa Skill wird der Key verwendet, um deine
+                Anfrage an die Google Gemini API weiterzuleiten und die Antwort
+                von Google Gemini auf deinem Echo-Gerät auszugeben.
               </p>
               <p>
                 <strong>Widerruf & Löschung:</strong>
-                Du kannst die Verknüpfung jederzeit mit sofortiger Wirkung in
-                der Amazon Alexa App unter
+                Du kannst die Verknüpfung jederzeit in der Amazon Alexa App
+                unter
                 <em
                   >Skills & Spiele &rarr; Schlaubi Schlumpf &rarr; Einstellungen
                   &rarr; Konto trennen</em
                 >
-                aufheben. Alternativ kannst du den API-Key direkt im
+                aufheben oder deinen API-Key direkt im
                 <a
                   href="https://aistudio.google.com/app/apikey"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Google AI Studio</a
                 >
-                löschen oder sperren.
+                löschen.
               </p>
             </article>
 

@@ -15,7 +15,7 @@
       tab_privacy: 'Datenschutz',
       link_title: 'Gemini API-Key verknüpfen',
       link_subtitle:
-        'Gib deinen persönlichen Google Gemini API-Key ein, um den Alexa Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.',
+        'Gib deinen Google Gemini API-Key ein, um den Alexa Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.',
       label_api_key: 'Google Gemini API-Key',
       get_key_link: 'Key besorgen ↗',
       format_hint: 'Beginnt üblicherweise mit <code>AIzaSy</code> (39 Zeichen)',
@@ -23,27 +23,24 @@
       btn_testing: 'Prüfe...',
       btn_link_alexa: 'Mit Alexa verknüpfen',
       btn_linking: 'Wird übertragen...',
-      security_title: 'Zero-Server Datenschutzgarantie',
-      security_desc:
-        'Diese Seite läuft zu 100 % in deinem Browser auf GitHub Pages. Dein Schlüssel wird ausschließlich verschlüsselt im URL-Fragment direkt an Amazon Alexa übertragen. Es existiert keine Datenbank und kein Zwischenserver.',
       toggle_dev_mode: '🛠️ Entwickler- & Test-Modus',
       guide_title: 'So erhältst du deinen kostenlosen API-Key',
       guide_subtitle:
-        'Google stellt Entwicklern und privaten Nutzern ein großzügiges kostenloses Kontingent für Gemini zur Verfügung.',
+        'Google stellt im Free Tier ein kostenloses Kontingent für Gemini zur Verfügung.',
       step1_heading: 'Google AI Studio aufrufen',
       step1_desc: 'Öffne die offizielle Entwicklerplattform von Google.',
       step2_heading: 'Mit Google-Konto anmelden',
       step2_desc:
-        'Logge dich mit deinem ganz normalen privaten Google-Konto (@gmail.com) ein. Eine Kreditkarte ist für den kostenlosen Free Tier in der Regel nicht erforderlich.',
+        'Logge dich mit deinem privaten Google-Konto (@gmail.com) ein. Eine Kreditkarte ist für den kostenlosen Free Tier in der Regel nicht erforderlich.',
       step3_heading: 'API-Schlüssel generieren',
       step3_desc:
-        'Klicke auf die blaue Schaltfläche "Create API key" bzw. "API-Schlüssel erstellen". Wähle ein bestehendes Projekt aus oder erstelle mit einem Klick ein neues Projekt.',
+        'Klicke auf die blaue Schaltfläche "Create API key" bzw. "API-Schlüssel erstellen".',
       step4_heading: 'Schlüssel kopieren & hier einfügen',
       step4_desc:
-        'Kopiere den generierten Schlüssel (beginnt mit AIzaSy...) in die Zwischenablage und füge ihn im Reiter "Verknüpfen" ein.',
-      faq_cost_title: '💰 Ist das wirklich kostenlos?',
+        'Kopiere den generierten Schlüssel (beginnt mit AIzaSy...) und füge ihn im Reiter "Verknüpfen" ein.',
+      faq_cost_title: '💰 Ist das kostenlos?',
       faq_cost_desc:
-        'Ja! Google bietet für Gemini 1.5 Flash und verwandte Modelle im Free Tier bis zu 15 Anfragen pro Minute und 1.500 Anfragen pro Tag völlig kostenfrei an. Für die alltägliche Nutzung mit Alexa ist dieses Kontingent mehr als ausreichend.',
+        'Google stellt für Gemini im <strong>Free Tier</strong> ein kostenloses Kontingent bereit (z. B. bis zu 15 Anfragen/Min). Solange du den Free Tier nutzt, ist die Verwendung komplett kostenlos. Falls du ein kostenpflichtiges Google Cloud Abrechnungskonto verknüpft hast oder das Kontingent überschreitest, fallen die regulären Kosten des Anbieters (Google) an.',
       privacy_title: 'Datenschutzerklärung & Nutzungsbedingungen',
       privacy_subtitle:
         'Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Schlaubi Schlumpf.',
@@ -51,17 +48,10 @@
       legal_terms_h3: '2. Nutzungsbedingungen (Terms of Use)',
       footer_privacy: 'Datenschutz',
       footer_terms: 'Nutzungsbedingungen',
-      // Banner Messages
-      banner_active_title: 'Mit Amazon Alexa verbunden',
-      banner_active_desc:
-        'Du wirst nach der Eingabe direkt zur Alexa-App zurückgeleitet.',
-      banner_standalone_title: 'Hinweis: Kein Alexa-Aufruf erkannt',
-      banner_standalone_desc:
-        'Diese Seite wurde direkt im Browser geöffnet. Um den Skill zu nutzen, starte die Verknüpfung in der Amazon Alexa App unter Skills &rarr; Schlaubi Schlumpf &rarr; Einstellungen.',
       // Notifications
       error_no_key: 'Bitte gib deinen Google Gemini API-Key ein.',
       error_missing_params:
-        'Fehler: redirect_uri oder state fehlt. Öffne diesen Link über die Alexa-App oder aktiviere den Entwickler-Modus.',
+        'Hinweis: Keine Alexa-Sitzung aktiv (redirect_uri / state fehlt). Bitte öffne diese Seite über den Verknüpfen-Button in der Alexa-App oder nutze den Entwickler-Modus unten.',
       key_looks_invalid:
         'Hinweis: Der eingegebene Key hat ein ungewöhnliches Format (Google-Keys beginnen meist mit "AIzaSy...").',
       test_valid_heading: 'Verbindung erfolgreich!',
@@ -80,7 +70,7 @@
       tab_privacy: 'Privacy & Terms',
       link_title: 'Link Gemini API Key',
       link_subtitle:
-        'Enter your personal Google Gemini API key to activate the <strong>Schlaubi Schlumpf</strong> Alexa skill.',
+        'Enter your Google Gemini API key to activate the <strong>Schlaubi Schlumpf</strong> Alexa skill.',
       label_api_key: 'Google Gemini API Key',
       get_key_link: 'Get API Key ↗',
       format_hint: 'Usually starts with <code>AIzaSy</code> (39 characters)',
@@ -88,27 +78,23 @@
       btn_testing: 'Checking...',
       btn_link_alexa: 'Link with Alexa',
       btn_linking: 'Transferring...',
-      security_title: 'Zero-Server Privacy Guarantee',
-      security_desc:
-        'This page runs 100% in your browser on GitHub Pages. Your key is transferred exclusively via the encrypted URL fragment directly to Amazon Alexa. There is no database and no intermediary server.',
       toggle_dev_mode: '🛠️ Developer & Test Mode',
       guide_title: 'How to Get Your Free API Key',
       guide_subtitle:
-        'Google provides a generous free tier for Gemini for developers and private users.',
+        'Google provides a free quota for Gemini in the Free Tier.',
       step1_heading: 'Open Google AI Studio',
       step1_desc: 'Go to the official Google developer platform.',
       step2_heading: 'Sign in with Google',
       step2_desc:
         'Sign in with your regular Google account (@gmail.com). A credit card is usually not required for the free tier.',
       step3_heading: 'Generate API Key',
-      step3_desc:
-        'Click on the "Create API key" button. Select an existing project or create a new one with a single click.',
+      step3_desc: 'Click on the "Create API key" button.',
       step4_heading: 'Copy Key & Paste Here',
       step4_desc:
         'Copy the generated key (starts with AIzaSy...) and paste it in the "Link Key" tab.',
-      faq_cost_title: '💰 Is it really free?',
+      faq_cost_title: '💰 Is it free?',
       faq_cost_desc:
-        'Yes! Google provides up to 15 requests per minute and 1,500 requests per day for Gemini 1.5 Flash in the free tier at no cost. This is more than enough for daily Alexa voice queries.',
+        'Google provides a free quota in the Gemini <strong>Free Tier</strong> (e.g. up to 15 requests/min). As long as you use the Free Tier, usage is completely free. If you have a paid Google Cloud billing account linked or exceed the quota, regular provider charges apply.',
       privacy_title: 'Privacy Policy & Terms of Use',
       privacy_subtitle:
         'Transparency regarding data processing for the Schlaubi Schlumpf Alexa skill.',
@@ -116,17 +102,10 @@
       legal_terms_h3: '2. Terms of Use',
       footer_privacy: 'Privacy Policy',
       footer_terms: 'Terms of Use',
-      // Banner Messages
-      banner_active_title: 'Connected to Amazon Alexa',
-      banner_active_desc:
-        'You will be redirected back to the Alexa app once you submit.',
-      banner_standalone_title: 'Notice: Opened directly in browser',
-      banner_standalone_desc:
-        'To link your skill, please trigger account linking inside the Amazon Alexa app (Skills &rarr; Schlaubi Schlumpf &rarr; Settings).',
       // Notifications
       error_no_key: 'Please enter your Google Gemini API key.',
       error_missing_params:
-        'Error: redirect_uri or state is missing. Please open this link via the Alexa app or use Developer Mode.',
+        'Notice: No active Alexa session (missing redirect_uri / state). Please open this link via the Alexa app or use Developer Mode below.',
       key_looks_invalid:
         'Notice: Key format looks unusual (Google keys usually start with "AIzaSy...").',
       test_valid_heading: 'Connection Successful!',
@@ -151,7 +130,6 @@
   }
 
   // DOM Elements
-  const sessionBanner = document.getElementById('sessionBanner')
   const authForm = document.getElementById('authForm')
   const apiKeyInput = document.getElementById('apiKeyInput')
   const togglePasswordBtn = document.getElementById('togglePasswordBtn')
@@ -195,7 +173,6 @@
     initTheme()
     initLanguage()
     parseUrlParameters()
-    renderSessionStatus()
     setupEventListeners()
     handleHashNavigation()
   }
@@ -262,7 +239,6 @@
       }
     })
 
-    renderSessionStatus()
     updateDevPreview()
   }
 
@@ -279,33 +255,6 @@
     authParams.state = searchParams.get('state')
     authParams.clientId = searchParams.get('client_id')
     authParams.responseType = searchParams.get('response_type')
-  }
-
-  /**
-   * Render Session Status Banner
-   */
-  function renderSessionStatus() {
-    const hasParams = Boolean(authParams.redirectUri && authParams.state)
-
-    if (hasParams) {
-      sessionBanner.className = 'session-banner active-session'
-      sessionBanner.innerHTML = `
-        <span class="banner-dot"></span>
-        <div class="banner-text">
-          <strong>${t('banner_active_title')}</strong>
-          <span>${t('banner_active_desc')}</span>
-        </div>
-      `
-    } else {
-      sessionBanner.className = 'session-banner standalone-session'
-      sessionBanner.innerHTML = `
-        <span class="banner-dot"></span>
-        <div class="banner-text">
-          <strong>${t('banner_standalone_title')}</strong>
-          <span>${t('banner_standalone_desc')}</span>
-        </div>
-      `
-    }
   }
 
   /**
@@ -537,7 +486,6 @@
   function applyDevParameters() {
     authParams.redirectUri = devRedirectUri.value.trim()
     authParams.state = devState.value.trim()
-    renderSessionStatus()
     updateDevPreview()
     showFeedback(
       'info',
@@ -548,7 +496,6 @@
 
   function clearDevParameters() {
     parseUrlParameters()
-    renderSessionStatus()
     updateDevPreview()
     hideFeedback()
   }
