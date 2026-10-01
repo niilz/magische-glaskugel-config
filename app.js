@@ -515,7 +515,7 @@
    * Theme Management
    */
   function initTheme() {
-    const savedTheme = localStorage.getItem('theme_preference') || 'system'
+    const savedTheme = localStorage.getItem('theme_preference') || 'dark'
     setTheme(savedTheme)
   }
 
