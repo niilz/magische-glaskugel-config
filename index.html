@@ -183,20 +183,65 @@
         >
           <div class="panel-intro">
             <h2 class="panel-title" data-i18n="link_title">
-              Gemini API-Key verknüpfen
+              KI-Modell & API-Key verknüpfen
             </h2>
             <p class="panel-subtitle" data-i18n="link_subtitle">
-              Gib deinen persönlichen Google Gemini API-Key ein, um den Alexa
-              Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.
+              Wähle deinen Anbieter und gib deinen API-Key ein, um Schlaubi
+              Schlumpf freizuschalten.
             </p>
           </div>
 
           <form id="authForm" class="auth-form" novalidate>
+            <!-- Provider Selection -->
+            <div class="input-group">
+              <label
+                for="providerSelect"
+                class="form-label"
+                data-i18n="label_provider"
+                >KI-Anbieter</label
+              >
+              <select id="providerSelect" class="form-select" required>
+                <option
+                  value=""
+                  disabled
+                  selected
+                  data-i18n="opt_select_provider"
+                >
+                  -- Anbieter wählen --
+                </option>
+                <option value="google">Google (Gemini)</option>
+                <option value="openai">OpenAI (ChatGPT)</option>
+                <option value="anthropic">Anthropic (Claude)</option>
+                <option value="openrouter">OpenRouter (Multi-Provider)</option>
+              </select>
+            </div>
+
+            <!-- Model Selection -->
+            <div class="input-group">
+              <label
+                for="modelSelect"
+                class="form-label"
+                data-i18n="label_model"
+                >Modell</label
+              >
+              <select id="modelSelect" class="form-select" disabled required>
+                <option
+                  value=""
+                  disabled
+                  selected
+                  data-i18n="opt_select_model_first"
+                >
+                  -- Zuerst Anbieter wählen --
+                </option>
+              </select>
+            </div>
+
             <div class="input-group">
               <div class="label-row">
                 <label
                   for="apiKeyInput"
                   class="form-label"
+                  id="apiKeyLabel"
                   data-i18n="label_api_key"
                   >Google Gemini API-Key</label
                 >
@@ -205,6 +250,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   class="link-external"
+                  id="getKeyLink"
                   data-i18n="get_key_link"
                 >
                   Key besorgen ↗
@@ -454,19 +500,41 @@
               <div class="step-number">1</div>
               <div class="step-body">
                 <h3 class="step-heading" data-i18n="step1_heading">
-                  Google AI Studio aufrufen
+                  Entwicklerportal aufrufen
                 </h3>
                 <p data-i18n="step1_desc">
-                  Öffne die offizielle Entwicklerplattform von Google.
+                  Öffne die API-Key-Seite deines gewünschten Anbieters:
                 </p>
-                <a
-                  href="https://aistudio.google.com/app/apikey"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-outline btn-sm"
-                >
-                  <span>aistudio.google.com öffnen ↗</span>
-                </a>
+                <div class="provider-links-list">
+                  <a
+                    href="https://aistudio.google.com/app/apikey"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-sm"
+                    >Google AI Studio ↗</a
+                  >
+                  <a
+                    href="https://platform.openai.com/api-keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-sm"
+                    >OpenAI Platform ↗</a
+                  >
+                  <a
+                    href="https://console.anthropic.com/settings/keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-sm"
+                    >Anthropic Console ↗</a
+                  >
+                  <a
+                    href="https://openrouter.ai/keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-sm"
+                    >OpenRouter ↗</a
+                  >
+                </div>
               </div>
             </li>
 
@@ -522,9 +590,20 @@
               💰 Welche Kosten entstehen?
             </h3>
             <p data-i18n="faq_cost_desc">
-              Die anfallenden Kosten hängen vom gewählten Tarif und Modell
-              deines Google-Kontos ab. Bitte informiere dich direkt bei Google
+              Die anfallenden Kosten hängen vom gewählten Anbieter, Tarif und
+              Modell ab. Bitte informiere dich direkt beim jeweiligen Anbieter
               über die aktuellen Preise und Konditionen.
+            </p>
+          </div>
+
+          <div class="faq-box" style="margin-top: 12px">
+            <h3 class="faq-title" data-i18n="faq_change_title">
+              🔄 Kann ich Modell oder Key später ändern?
+            </h3>
+            <p data-i18n="faq_change_desc">
+              Ja! Öffne in der Alexa App einfach Skills & Spiele → Schlaubi
+              Schlumpf → Einstellungen → Konto verknüpfen. Dort kannst du
+              jederzeit ein anderes Modell oder einen neuen Key wählen.
             </p>
           </div>
         </section>
