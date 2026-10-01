@@ -1,0 +1,26 @@
+{
+  "name": "schlaubi-schlumpf-apikey-setup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alexa account linking setup page for Google Gemini API key via GitHub Pages",
+  "scripts": {
+    "deploy": "node scripts/deploy.js",
+    "deploy:gh-pages": "gh-pages -d . --dotfiles",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "alexa",
+    "account-linking",
+    "gemini",
+    "github-pages"
+  ],
+  "author": "niilz",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.5.0"
+  }
+}

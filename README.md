@@ -43,17 +43,19 @@ sequenceDiagram
 
 ## 🚀 Schritt 1: GitHub Pages aktivieren
 
-1. Repository auf GitHub pushen:
+1. GitHub Remote einrichten (falls noch nicht geschehen):
    ```bash
-   git add .
-   git commit -m "Add GitHub Pages account linking app"
-   git push origin main
+   git remote add origin https://github.com/<dein-github-benutzername>/schlaubi-schlumpf-apikey-setup.git
    ```
-2. Im GitHub-Repository auf **Settings** &rarr; **Pages** gehen.
-3. Unter **Build and deployment**:
-   - **Source**: `Deploy from a branch`
-   - **Branch**: `main` / `root`
-4. Nach wenigen Sekunden ist deine Seite erreichbar unter:
+2. Projekt direkt über die Kommandozeile bereitstellen:
+   ```bash
+   npm run deploy
+   ```
+   Dieser Befehl prüft offene Änderungen und pusht den aktuellen Stand zu GitHub. Die integrierte GitHub Action (`.github/workflows/deploy.yml`) baut und veröffentlicht die Seite automatisch auf GitHub Pages.
+
+3. Im GitHub-Repository unter **Settings** &rarr; **Pages**:
+   - **Source**: `GitHub Actions` (oder `Deploy from a branch` &rarr; `main` / `/ (root)`)
+4. Deine Seite ist erreichbar unter:
    `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/`
 
 ---
