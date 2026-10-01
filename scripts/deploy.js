@@ -75,7 +75,7 @@ function main() {
   }
 
   // 5. Derive GitHub Pages URL
-  let repoName = 'schlaubi-schlumpf-apikey-setup'
+  let repoName = 'magische-glaskugel-config'
   let username = 'user'
   const matchHttps = originUrl.match(/github\.com\/([^/]+)\/([^/.]+)/)
   const matchSsh = originUrl.match(/github\.com:([^/]+)\/([^/.]+)/)

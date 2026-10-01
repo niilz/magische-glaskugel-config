@@ -6,11 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Schlaubi Schlumpf – Gemini API-Key verknüpfen</title>
+    <title>Magische Glaskugel – API-Key verknüpfen</title>
 
     <meta
       name="description"
-      content="Verknüpfe deinen persönlichen Google Gemini API-Key mit dem Alexa Skill Schlaubi Schlumpf über das sichere Amazon Account Linking."
+      content="Verknüpfe deinen persönlichen KI API-Key mit dem Alexa Skill Magische Glaskugel über das sichere Amazon Account Linking."
     />
     <meta
       name="theme-color"
@@ -42,14 +42,16 @@
         <div class="brand">
           <img
             src="favicon.svg"
-            alt="Schlaubi Schlumpf Logo"
+            alt="Magische Glaskugel Logo"
             class="brand-logo"
             width="44"
             height="44"
           />
           <div class="brand-text">
-            <h1 class="brand-title">Schlaubi Schlumpf</h1>
-            <span class="brand-badge">Gemini AI Alexa Skill</span>
+            <h1 class="brand-title">Magische Glaskugel</h1>
+            <span class="brand-badge" data-i18n="brand_badge"
+              >KI Alexa Skill</span
+            >
           </div>
         </div>
         <div class="header-actions">
@@ -194,8 +196,8 @@
               KI-Modell & API-Key verknüpfen
             </h2>
             <p class="panel-subtitle" data-i18n="link_subtitle">
-              Wähle deinen Anbieter und gib deinen API-Key ein, um Schlaubi
-              Schlumpf freizuschalten.
+              Wähle deinen Anbieter und gib deinen API-Key ein, um Magische
+              Glaskugel freizuschalten.
             </p>
           </div>
 
@@ -687,8 +689,8 @@
               🔄 Kann ich Modell oder Key später ändern?
             </h3>
             <p data-i18n="faq_change_desc">
-              Ja! Öffne in der Alexa App einfach Skills & Spiele → Schlaubi
-              Schlumpf → Einstellungen → Konto verknüpfen. Dort kannst du
+              Ja! Öffne in der Alexa App einfach Skills & Spiele → Magische
+              Glaskugel → Einstellungen → Konto verknüpfen. Dort kannst du
               jederzeit ein anderes Modell oder einen neuen Key wählen.
             </p>
           </div>
@@ -707,7 +709,7 @@
             </h2>
             <p class="panel-subtitle" data-i18n="privacy_subtitle">
               Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills
-              Schlaubi Schlumpf.
+              Magische Glaskugel.
             </p>
           </div>
 
@@ -726,25 +728,19 @@
               <p>
                 <strong>Nutzung im Skill:</strong>
                 Bei Anfragen an den Alexa Skill wird der Key verwendet, um deine
-                Anfrage an die Google Gemini API weiterzuleiten und die Antwort
-                von Google Gemini auf deinem Echo-Gerät auszugeben.
+                Anfrage an die gewählte KI-Schnittstelle weiterzuleiten und die
+                Antwort auf deinem Echo-Gerät auszugeben.
               </p>
               <p>
                 <strong>Widerruf & Löschung:</strong>
                 Du kannst die Verknüpfung jederzeit in der Amazon Alexa App
                 unter
                 <em
-                  >Skills & Spiele &rarr; Schlaubi Schlumpf &rarr; Einstellungen
-                  &rarr; Konto trennen</em
+                  >Skills & Spiele &rarr; Magische Glaskugel &rarr;
+                  Einstellungen &rarr; Konto trennen</em
                 >
-                aufheben oder deinen API-Key direkt im
-                <a
-                  href="https://aistudio.google.com/app/apikey"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Google AI Studio</a
-                >
-                löschen.
+                aufheben oder deinen API-Key direkt im Entwickler-Dashboard des
+                Anbieters löschen.
               </p>
             </article>
 
@@ -753,29 +749,26 @@
                 2. Nutzungsbedingungen (Terms of Use)
               </h3>
               <p>
-                Der Alexa Skill "Schlaubi Schlumpf" ist eine Schnittstelle zur
-                Nutzung von Googles generativen Sprachmodellen auf
-                Amazon-Echo-Geräten.
+                Der Alexa Skill "Magische Glaskugel" ist eine Schnittstelle zur
+                Nutzung von generativen Sprachmodellen auf Amazon-Echo-Geräten.
               </p>
               <p>
                 <strong>Eigener API-Key:</strong>
-                Die Nutzung setzt einen gültigen Google Gemini API-Key voraus,
-                der den Nutzungsbedingungen von Google AI Studio unterliegt.
+                Die Nutzung setzt einen gültigen API-Key voraus, der den
+                Nutzungsbedingungen des jeweiligen Anbieters unterliegt.
               </p>
               <p>
                 <strong>Haftungsausschluss:</strong>
                 Künstliche Intelligenzen können fehlerhafte, unvollständige oder
                 irreführende Antworten generieren. Der Betreiber übernimmt keine
-                Haftung für die Richtigkeit der von Gemini generierten Antworten
-                sowie für eventuelle Überschreitungen von Quoten deines
-                Google-Kontos.
+                Haftung für die Richtigkeit der generierten Antworten sowie für
+                eventuelle Überschreitungen von Quoten deines Kontos.
               </p>
               <p>
                 <strong>Markenhinweis:</strong>
                 Amazon, Alexa und alle damit verbundenen Logos sind Marken von
-                Amazon.com, Inc. Google und Gemini sind Marken von Google LLC.
-                Dieses Projekt steht in keiner offiziellen Verbindung zu Amazon
-                oder Google.
+                Amazon.com, Inc. Dieses Projekt steht in keiner offiziellen
+                Verbindung zu Amazon oder den unterstützten KI-Anbietern.
               </p>
             </article>
           </div>
@@ -802,7 +795,7 @@
           >
           <span class="footer-dot">•</span>
           <a
-            href="https://github.com/niilz/schlaubi-schlumpf-apikey-setup"
+            href="https://github.com/niilz/magische-glaskugel-config"
             target="_blank"
             rel="noopener noreferrer"
             class="footer-link"
@@ -810,11 +803,11 @@
           >
         </div>
         <p class="footer-copy">
-          Schlaubi Schlumpf &bull; Gemini AI Connector für Amazon Alexa
+          Magische Glaskugel &bull; AI Connector für Amazon Alexa
         </p>
       </footer>
     </div>
 
-    <script src="app.js?v=20261001-2"></script>
+    <script src="app.js?v=20261001-4"></script>
   </body>
 </html>

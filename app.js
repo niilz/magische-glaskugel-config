@@ -1,5 +1,5 @@
 /**
- * Schlaubi Schlumpf – Gemini AI Alexa Skill Account Linking
+ * Magische Glaskugel – Multi-Provider Alexa Skill Account Linking
  * Static OAuth 2.0 Implicit Grant Handler for GitHub Pages
  */
 
@@ -15,7 +15,7 @@
       tab_privacy: 'Datenschutz',
       link_title: 'KI-Modell & API-Key verknüpfen',
       link_subtitle:
-        'Wähle deinen Anbieter und gib deinen API-Key ein, um den Alexa Skill <strong>Schlaubi Schlumpf</strong> freizuschalten.',
+        'Wähle deinen Anbieter und gib deinen API-Key ein, um den Alexa Skill <strong>Magische Glaskugel</strong> freizuschalten.',
       label_provider: 'KI-Anbieter',
       label_model: 'Modell',
       label_api_key: 'API-Key',
@@ -43,10 +43,10 @@
         'Die anfallenden Kosten hängen vom gewählten Anbieter, Tarif und Modell ab. Bitte informiere dich direkt beim jeweiligen Anbieter über die aktuellen Preise und Konditionen.',
       faq_change_title: '🔄 Kann ich Modell oder Key später ändern?',
       faq_change_desc:
-        'Ja! Öffne in der Alexa App einfach Skills & Spiele → Schlaubi Schlumpf → Einstellungen → Konto verknüpfen. Dort kannst du jederzeit ein anderes Modell oder einen neuen Key wählen.',
+        'Ja! Öffne in der Alexa App einfach Skills & Spiele → Magische Glaskugel → Einstellungen → Konto verknüpfen. Dort kannst du jederzeit ein anderes Modell oder einen neuen Key wählen.',
       privacy_title: 'Datenschutzerklärung & Nutzungsbedingungen',
       privacy_subtitle:
-        'Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Schlaubi Schlumpf.',
+        'Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Magische Glaskugel.',
       legal_privacy_h3: '1. Datenschutzerklärung (Privacy Policy)',
       legal_terms_h3: '2. Nutzungsbedingungen (Terms of Use)',
       footer_privacy: 'Datenschutz',
@@ -94,7 +94,7 @@
       tab_privacy: 'Privacy & Terms',
       link_title: 'Link AI Model & Key',
       link_subtitle:
-        'Select your provider and enter your API key to activate the <strong>Schlaubi Schlumpf</strong> Alexa skill.',
+        'Select your provider and enter your API key to activate the <strong>Magische Glaskugel</strong> Alexa skill.',
       label_provider: 'AI Provider',
       label_model: 'Model',
       label_api_key: 'API Key',
@@ -120,10 +120,10 @@
         'Costs depend on the chosen provider, plan, and model. Please refer directly to the provider for current pricing and terms.',
       faq_change_title: '🔄 Can I change model or key later?',
       faq_change_desc:
-        'Yes! Simply go to Alexa App → Skills & Games → Schlaubi Schlumpf → Settings → Link Account. You can switch models or update keys anytime.',
+        'Yes! Simply go to Alexa App → Skills & Games → Magische Glaskugel → Settings → Link Account. You can switch models or update keys anytime.',
       privacy_title: 'Privacy Policy & Terms of Use',
       privacy_subtitle:
-        'Transparency regarding data processing for the Schlaubi Schlumpf Alexa skill.',
+        'Transparency regarding data processing for the Magische Glaskugel Alexa skill.',
       legal_privacy_h3: '1. Privacy Policy',
       legal_terms_h3: '2. Terms of Use',
       footer_privacy: 'Privacy Policy',
