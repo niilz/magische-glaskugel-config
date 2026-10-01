@@ -25,7 +25,6 @@
       btn_testing: 'Prüfe & lade Modelle...',
       btn_link_alexa: 'Mit Alexa verknüpfen',
       btn_linking: 'Wird übertragen...',
-      toggle_dev_mode: '🛠️ Entwickler- & Test-Modus',
       guide_title: 'So erhältst du deinen API-Key',
       guide_subtitle:
         'In wenigen Schritten erstellst du deinen persönlichen API-Key.',
@@ -73,7 +72,7 @@
         'Bitte fülle alle Pflichtfelder aus (Anbieter, Modell und API-Key).',
       error_no_key: 'Bitte gib deinen API-Key ein.',
       error_missing_params:
-        'Hinweis: Keine Alexa-Sitzung aktiv (redirect_uri / state fehlt). Bitte öffne diese Seite über den Verknüpfen-Button in der Alexa-App oder nutze den Entwickler-Modus unten.',
+        'Hinweis: Keine Alexa-Sitzung aktiv (redirect_uri / state fehlt). Bitte öffne diese Seite über den Verknüpfen-Button in der Alexa-App unter Skill-Einstellungen > Konto verknüpfen.',
       key_looks_invalid:
         'Hinweis: Der eingegebene Key hat ein ungewöhnliches Format.',
       test_valid_heading: 'Verbindung erfolgreich!',
@@ -104,7 +103,6 @@
       btn_testing: 'Testing & loading models...',
       btn_link_alexa: 'Link with Alexa',
       btn_linking: 'Transferring...',
-      toggle_dev_mode: '🛠️ Developer & Test Mode',
       guide_title: 'How to Get Your API Key',
       guide_subtitle: 'Follow these steps to create your personal AI API key.',
       step1_heading: 'Open Developer Portal',
@@ -150,7 +148,7 @@
         'Please fill in all fields (provider, model, and API key).',
       error_no_key: 'Please enter your API key.',
       error_missing_params:
-        'Notice: No active Alexa session (missing redirect_uri / state). Please open this link via the Alexa app or use Developer Mode below.',
+        'Notice: No active Alexa session (missing redirect_uri / state). Please open this page via the Alexa app under Skill Settings > Link Account.',
       key_looks_invalid: 'Notice: Key format looks unusual.',
       test_valid_heading: 'Connection Successful!',
       test_valid_text: 'Your API key is valid and ready to link with Alexa.',
@@ -490,15 +488,6 @@
   const footerPrivacyLink = document.getElementById('footerPrivacyLink')
   const footerTermsLink = document.getElementById('footerTermsLink')
 
-  // Dev Mode
-  const devModeToggleLink = document.getElementById('devModeToggleLink')
-  const devSection = document.getElementById('devSection')
-  const devRedirectUri = document.getElementById('devRedirectUri')
-  const devState = document.getElementById('devState')
-  const applyDevParamsBtn = document.getElementById('applyDevParamsBtn')
-  const clearDevParamsBtn = document.getElementById('clearDevParamsBtn')
-  const devRedirectPreview = document.getElementById('devRedirectPreview')
-
   /**
    * Initialize Application
    */
@@ -572,8 +561,6 @@
         elem.innerHTML = dict[key]
       }
     })
-
-    updateDevPreview()
   }
 
   function t(key) {
@@ -680,7 +667,6 @@
         modelSelect.selectedIndex = 0
       }
     }
-    updateDevPreview()
   }
 
   /**
@@ -706,8 +692,6 @@
     customOpt.value = '__custom__'
     customOpt.textContent = t('opt_custom_model')
     modelSelect.appendChild(customOpt)
-
-    updateDevPreview()
   }
 
   /**
@@ -728,7 +712,6 @@
       if (apiKeyInput) apiKeyInput.placeholder = 'API-Key eingeben...'
       if (formatHint) formatHint.innerHTML = ''
       toggleManualModel(false)
-      updateDevPreview()
       return
     }
 
@@ -754,7 +737,6 @@
     if (formatHint) {
       formatHint.innerHTML = `<span class="hint-bullet">•</span> <span>${prov.formatHint}</span>`
     }
-    updateDevPreview()
   }
 
   /**
@@ -908,8 +890,6 @@
 
     if (!redirectUri || !state) {
       showFeedback('error', t('error_missing_params'), '')
-      // Auto open dev mode to guide developer
-      devSection.classList.remove('hidden')
       return
     }
 
@@ -946,8 +926,6 @@
 
     // Build standard OAuth 2.0 Implicit Grant fragment
     const redirectUrl = `${redirectUri}#access_token=${encodeURIComponent(token)}&token_type=Bearer&state=${encodeURIComponent(state)}`
-
-    updateDevPreview(redirectUrl)
 
     // Brief transition before navigating
     setTimeout(() => {
@@ -1032,51 +1010,6 @@
   }
 
   /**
-   * Developer / Test Mode
-   */
-  function updateDevPreview(forcedUrl) {
-    const apiKey = getSanitizedKey()
-    const token =
-      forcedUrl ||
-      (apiKey && providerSelect?.value && modelSelect?.value
-        ? buildTokenPayload(apiKey)
-        : null)
-
-    const redirectUri =
-      authParams.redirectUri ||
-      devRedirectUri?.value ||
-      'https://layla.amazon.com/api/skill/link/VENDOR_SIMULATION'
-    const state =
-      authParams.state || devState?.value || 'simulated-state-token-12345'
-
-    const preview =
-      forcedUrl ||
-      (token
-        ? `${redirectUri}#access_token=${encodeURIComponent(token)}&token_type=Bearer&state=${encodeURIComponent(state)}`
-        : 'Bitte zuerst Anbieter, Modell und Key eingeben')
-    if (devRedirectPreview) {
-      devRedirectPreview.textContent = preview
-    }
-  }
-
-  function applyDevParameters() {
-    authParams.redirectUri = devRedirectUri.value.trim()
-    authParams.state = devState.value.trim()
-    updateDevPreview()
-    showFeedback(
-      'info',
-      'Testparameter aktiv',
-      'Du kannst die Verknüpfung nun mit Testdaten ausprobieren.',
-    )
-  }
-
-  function clearDevParameters() {
-    parseUrlParameters()
-    updateDevPreview()
-    hideFeedback()
-  }
-
-  /**
    * Register Event Listeners
    */
   function setupEventListeners() {
@@ -1095,19 +1028,12 @@
       modelSelect.addEventListener('change', () => {
         if (modelSelect.value === '__custom__') {
           toggleManualModel(true)
-        } else {
-          updateDevPreview()
         }
       })
     }
     if (toggleManualModelBtn) {
       toggleManualModelBtn.addEventListener('click', () => {
         toggleManualModel()
-      })
-    }
-    if (customModelInput) {
-      customModelInput.addEventListener('input', () => {
-        updateDevPreview()
       })
     }
 
@@ -1119,7 +1045,6 @@
 
     apiKeyInput.addEventListener('input', () => {
       hideFeedback()
-      updateDevPreview()
     })
 
     // Tab Buttons
@@ -1159,17 +1084,6 @@
     }
 
     window.addEventListener('hashchange', handleHashNavigation)
-
-    // Dev Mode Toggle & Buttons
-    devModeToggleLink.addEventListener('click', () => {
-      devSection.classList.toggle('hidden')
-      updateDevPreview()
-    })
-
-    applyDevParamsBtn.addEventListener('click', applyDevParameters)
-    clearDevParamsBtn.addEventListener('click', clearDevParameters)
-    devRedirectUri.addEventListener('input', () => updateDevPreview())
-    devState.addEventListener('input', () => updateDevPreview())
   }
 
   // Run on DOM Ready

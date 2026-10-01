@@ -41,7 +41,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="style.css?v=20261001-4" />
+    <link rel="stylesheet" href="style.css?v=20261001-5" />
   </head>
   <body>
     <div class="page-wrapper">
@@ -505,73 +505,6 @@
               </button>
             </div>
           </form>
-
-          <!-- Developer Mode Toggle Link (Discreet) -->
-          <div class="dev-mode-link-wrapper">
-            <button
-              type="button"
-              id="devModeToggleLink"
-              class="text-link-subtle"
-              data-i18n="toggle_dev_mode"
-            >
-              🛠️ Entwickler- & Test-Modus
-            </button>
-          </div>
-
-          <!-- Developer Test Box (Hidden by default) -->
-          <section
-            id="devSection"
-            class="dev-section hidden"
-            aria-label="Entwickler-Werkzeuge"
-          >
-            <h3 class="dev-title">🛠️ Entwickler-Testumgebung</h3>
-            <p class="dev-desc">
-              Hier können Parameter für das Alexa Implicit Grant Account Linking
-              simuliert werden:
-            </p>
-            <div class="dev-form-group">
-              <label for="devRedirectUri" class="dev-label"
-                >redirect_uri:</label
-              >
-              <input
-                type="url"
-                id="devRedirectUri"
-                class="dev-input"
-                value="https://layla.amazon.com/api/skill/link/VENDOR_SIMULATION"
-              />
-            </div>
-            <div class="dev-form-group">
-              <label for="devState" class="dev-label">state:</label>
-              <input
-                type="text"
-                id="devState"
-                class="dev-input"
-                value="simulated-state-token-12345"
-              />
-            </div>
-            <div class="dev-actions">
-              <button
-                type="button"
-                id="applyDevParamsBtn"
-                class="btn btn-sm btn-secondary"
-              >
-                Parameter anwenden
-              </button>
-              <button
-                type="button"
-                id="clearDevParamsBtn"
-                class="btn btn-sm btn-ghost"
-              >
-                Zurücksetzen
-              </button>
-            </div>
-            <div class="dev-output">
-              <div class="dev-output-title">Erzeugte Weiterleitungs-URL:</div>
-              <code id="devRedirectPreview" class="dev-code"
-                >Noch nicht generiert</code
-              >
-            </div>
-          </section>
         </section>
 
         <!-- Panel 2: Step-by-Step Guide -->
