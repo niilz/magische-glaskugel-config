@@ -24,23 +24,22 @@
       btn_link_alexa: 'Mit Alexa verknüpfen',
       btn_linking: 'Wird übertragen...',
       toggle_dev_mode: '🛠️ Entwickler- & Test-Modus',
-      guide_title: 'So erhältst du deinen kostenlosen API-Key',
+      guide_title: 'So erhältst du deinen API-Key',
       guide_subtitle:
-        'Google stellt im Free Tier ein kostenloses Kontingent für Gemini zur Verfügung.',
+        'In wenigen Schritten erstellst du deinen persönlichen Google Gemini API-Key.',
       step1_heading: 'Google AI Studio aufrufen',
       step1_desc: 'Öffne die offizielle Entwicklerplattform von Google.',
       step2_heading: 'Mit Google-Konto anmelden',
-      step2_desc:
-        'Logge dich mit deinem privaten Google-Konto (@gmail.com) ein. Eine Kreditkarte ist für den kostenlosen Free Tier in der Regel nicht erforderlich.',
+      step2_desc: 'Logge dich mit deinem Google-Konto ein.',
       step3_heading: 'API-Schlüssel generieren',
       step3_desc:
         'Klicke auf die blaue Schaltfläche "Create API key" bzw. "API-Schlüssel erstellen".',
       step4_heading: 'Schlüssel kopieren & hier einfügen',
       step4_desc:
         'Kopiere den generierten Schlüssel (beginnt mit AIzaSy...) und füge ihn im Reiter "Verknüpfen" ein.',
-      faq_cost_title: '💰 Ist das kostenlos?',
+      faq_cost_title: '💰 Welche Kosten entstehen?',
       faq_cost_desc:
-        'Google stellt für Gemini im <strong>Free Tier</strong> ein kostenloses Kontingent bereit (z. B. bis zu 15 Anfragen/Min). Solange du den Free Tier nutzt, ist die Verwendung komplett kostenlos. Falls du ein kostenpflichtiges Google Cloud Abrechnungskonto verknüpft hast oder das Kontingent überschreitest, fallen die regulären Kosten des Anbieters (Google) an.',
+        'Die anfallenden Kosten hängen vom gewählten Tarif und Modell deines Google-Kontos ab. Bitte informiere dich direkt bei Google über die aktuellen Preise und Konditionen.',
       privacy_title: 'Datenschutzerklärung & Nutzungsbedingungen',
       privacy_subtitle:
         'Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Schlaubi Schlumpf.',
@@ -79,22 +78,21 @@
       btn_link_alexa: 'Link with Alexa',
       btn_linking: 'Transferring...',
       toggle_dev_mode: '🛠️ Developer & Test Mode',
-      guide_title: 'How to Get Your Free API Key',
+      guide_title: 'How to Get Your API Key',
       guide_subtitle:
-        'Google provides a free quota for Gemini in the Free Tier.',
+        'Follow these steps to create your personal Google Gemini API key.',
       step1_heading: 'Open Google AI Studio',
       step1_desc: 'Go to the official Google developer platform.',
       step2_heading: 'Sign in with Google',
-      step2_desc:
-        'Sign in with your regular Google account (@gmail.com). A credit card is usually not required for the free tier.',
+      step2_desc: 'Sign in with your Google account.',
       step3_heading: 'Generate API Key',
       step3_desc: 'Click on the "Create API key" button.',
       step4_heading: 'Copy Key & Paste Here',
       step4_desc:
         'Copy the generated key (starts with AIzaSy...) and paste it in the "Link Key" tab.',
-      faq_cost_title: '💰 Is it free?',
+      faq_cost_title: '💰 What are the costs?',
       faq_cost_desc:
-        'Google provides a free quota in the Gemini <strong>Free Tier</strong> (e.g. up to 15 requests/min). As long as you use the Free Tier, usage is completely free. If you have a paid Google Cloud billing account linked or exceed the quota, regular provider charges apply.',
+        'Costs depend on the plan and model you choose in your Google account. Please refer directly to Google for current pricing and terms.',
       privacy_title: 'Privacy Policy & Terms of Use',
       privacy_subtitle:
         'Transparency regarding data processing for the Schlaubi Schlumpf Alexa skill.',
