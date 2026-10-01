@@ -21,8 +21,8 @@
       label_api_key: 'API-Key',
       get_key_link: 'Key besorgen ↗',
       format_hint: 'Format hängt vom Anbieter ab',
-      btn_test_key: 'Key testen',
-      btn_testing: 'Prüfe...',
+      btn_test_key: 'API-Key testen und Modelle laden',
+      btn_testing: 'Prüfe & lade Modelle...',
       btn_link_alexa: 'Mit Alexa verknüpfen',
       btn_linking: 'Wird übertragen...',
       toggle_dev_mode: '🛠️ Entwickler- & Test-Modus',
@@ -66,6 +66,8 @@
       test_valid_heading: 'Verbindung erfolgreich!',
       test_valid_text:
         'Dein API-Key ist aktiv und bereit für die Verknüpfung mit Alexa.',
+      test_models_loaded:
+        'Verbindung erfolgreich! {count} Modelle für {provider} geladen.',
       test_invalid_heading: 'API meldet Fehler',
       test_network_error:
         'Netzwerkprüfung fehlgeschlagen. Der Key kann trotzdem verknüpft werden.',
@@ -85,8 +87,8 @@
       label_api_key: 'API Key',
       get_key_link: 'Get API Key ↗',
       format_hint: 'Format depends on the provider',
-      btn_test_key: 'Test Key',
-      btn_testing: 'Checking...',
+      btn_test_key: 'Test API Key & Load Models',
+      btn_testing: 'Testing & loading models...',
       btn_link_alexa: 'Link with Alexa',
       btn_linking: 'Transferring...',
       toggle_dev_mode: '🛠️ Developer & Test Mode',
@@ -127,6 +129,8 @@
       key_looks_invalid: 'Notice: Key format looks unusual.',
       test_valid_heading: 'Connection Successful!',
       test_valid_text: 'Your API key is valid and ready to link with Alexa.',
+      test_models_loaded:
+        'Connection successful! Loaded {count} models for {provider}.',
       test_invalid_heading: 'API Error',
       test_network_error:
         'Network check failed. You can still proceed with linking.',
@@ -146,8 +150,8 @@
       defaultDisplayName: 'Gemini',
       models: [
         {
-          id: 'gemini-2.0-flash',
-          name: 'Gemini 2.0 Flash (Empfohlen)',
+          id: 'gemini-1.5-flash',
+          name: 'Gemini 1.5 Flash (Empfohlen)',
           displayName: 'Gemini',
         },
         {
@@ -161,8 +165,8 @@
           displayName: 'Gemini',
         },
       ],
-      testKey: async (apiKey) => {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}&pageSize=1`
+      loadModels: async (apiKey) => {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}&pageSize=100`
         const res = await fetch(url, {
           headers: { Accept: 'application/json' },
         })
@@ -170,6 +174,30 @@
           const err = await res.json().catch(() => ({}))
           throw new Error(err?.error?.message || `HTTP ${res.status}`)
         }
+        const data = await res.json()
+        const rawList = data.models || []
+        const filtered = rawList.filter((m) => {
+          const id = (m.name || '').replace(/^models\//, '')
+          const methods = m.supportedGenerationMethods || []
+          return (
+            methods.includes('generateContent') &&
+            !id.includes('embedding') &&
+            !id.includes('aqa') &&
+            !id.includes('imagen')
+          )
+        })
+        if (filtered.length === 0) return null
+        return filtered.map((m) => {
+          const id = (m.name || '').replace(/^models\//, '')
+          let label = m.displayName || id
+          if (id.includes('flash') && !label.includes('Flash'))
+            label += ' (Flash)'
+          return {
+            id,
+            name: label,
+            displayName: 'Gemini',
+          }
+        })
       },
     },
     openai: {
@@ -187,7 +215,7 @@
         },
         { id: 'gpt-4o', name: 'GPT-4o', displayName: 'ChatGPT' },
       ],
-      testKey: async (apiKey) => {
+      loadModels: async (apiKey) => {
         const res = await fetch('https://api.openai.com/v1/models', {
           headers: { Authorization: `Bearer ${apiKey}` },
         })
@@ -195,6 +223,36 @@
           const err = await res.json().catch(() => ({}))
           throw new Error(err?.error?.message || `HTTP ${res.status}`)
         }
+        const data = await res.json()
+        const rawList = data.data || []
+        const chatModels = rawList.filter((m) => {
+          const id = m.id || ''
+          return (
+            (id.startsWith('gpt-4') ||
+              id.startsWith('chatgpt-') ||
+              id.startsWith('o3-mini') ||
+              id.startsWith('o1-mini')) &&
+            !id.includes('realtime') &&
+            !id.includes('audio') &&
+            !id.includes('transcription') &&
+            !id.includes('tts') &&
+            !id.includes('search')
+          )
+        })
+        if (chatModels.length === 0) return null
+        chatModels.sort((a, b) => {
+          if (a.id === 'gpt-4o-mini') return -1
+          if (b.id === 'gpt-4o-mini') return 1
+          if (a.id === 'gpt-4o') return -1
+          if (b.id === 'gpt-4o') return 1
+          return a.id.localeCompare(b.id)
+        })
+        return chatModels.map((m) => ({
+          id: m.id,
+          name:
+            m.id === 'gpt-4o-mini' ? 'GPT-4o Mini (Empfohlen - schnell)' : m.id,
+          displayName: 'ChatGPT',
+        }))
       },
     },
     anthropic: {
@@ -221,18 +279,36 @@
           displayName: 'Claude',
         },
       ],
-      testKey: async (apiKey) => {
+      loadModels: async (apiKey) => {
         try {
           const res = await fetch('https://api.anthropic.com/v1/models', {
             headers: {
               'x-api-key': apiKey,
               'anthropic-version': '2023-06-01',
+              'anthropic-dangerous-direct-browser-access': 'true',
             },
           })
           if (!res.ok) {
             const err = await res.json().catch(() => ({}))
             throw new Error(err?.error?.message || `HTTP ${res.status}`)
           }
+          const data = await res.json()
+          const rawList = data.data || []
+          const filtered = rawList.filter((m) => {
+            const id = (m.id || '').toLowerCase()
+            return !id.includes('opus')
+          })
+          if (filtered.length === 0) return null
+          filtered.sort((a, b) => {
+            const aHaiku = a.id.includes('haiku') ? -1 : 1
+            const bHaiku = b.id.includes('haiku') ? -1 : 1
+            return aHaiku - bHaiku
+          })
+          return filtered.map((m) => ({
+            id: m.id,
+            name: m.display_name ? `${m.display_name} (${m.id})` : m.id,
+            displayName: 'Claude',
+          }))
         } catch (e) {
           if (
             e.name === 'TypeError' &&
@@ -241,7 +317,7 @@
             if (!apiKey.startsWith('sk-ant-')) {
               throw new Error('Key sollte mit sk-ant- beginnen.')
             }
-            return
+            return null
           }
           throw e
         }
@@ -256,8 +332,8 @@
       defaultDisplayName: 'OpenRouter',
       models: [
         {
-          id: 'google/gemini-2.0-flash-001',
-          name: 'Google Gemini 2.0 Flash (Schnell)',
+          id: 'google/gemini-2.5-flash',
+          name: 'Google Gemini 2.5 Flash (Schnell)',
           displayName: 'Gemini',
         },
         {
@@ -286,14 +362,47 @@
           displayName: 'DeepSeek',
         },
       ],
-      testKey: async (apiKey) => {
-        const res = await fetch('https://openrouter.ai/api/v1/auth/key', {
+      loadModels: async (apiKey) => {
+        const authRes = await fetch('https://openrouter.ai/api/v1/auth/key', {
           headers: { Authorization: `Bearer ${apiKey}` },
         })
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}))
-          throw new Error(err?.error?.message || `HTTP ${res.status}`)
+        if (!authRes.ok) {
+          const err = await authRes.json().catch(() => ({}))
+          throw new Error(err?.error?.message || `HTTP ${authRes.status}`)
         }
+        const res = await fetch('https://openrouter.ai/api/v1/models')
+        if (!res.ok) return null
+        const data = await res.json()
+        const rawList = data.data || []
+        const popular = rawList.filter((m) => {
+          const id = m.id || ''
+          return (
+            (id.startsWith('google/') ||
+              id.startsWith('openai/') ||
+              id.startsWith('anthropic/') ||
+              id.startsWith('meta-llama/') ||
+              id.startsWith('deepseek/') ||
+              id.startsWith('mistralai/')) &&
+            !id.toLowerCase().includes('opus') &&
+            !id.toLowerCase().includes('embed')
+          )
+        })
+        if (popular.length === 0) return null
+        return popular.slice(0, 30).map((m) => {
+          const id = m.id
+          let providerName = 'KI'
+          if (id.startsWith('google/')) providerName = 'Gemini'
+          else if (id.startsWith('openai/')) providerName = 'ChatGPT'
+          else if (id.startsWith('anthropic/')) providerName = 'Claude'
+          else if (id.startsWith('meta-llama/')) providerName = 'Llama'
+          else if (id.startsWith('deepseek/')) providerName = 'DeepSeek'
+          else if (id.startsWith('mistralai/')) providerName = 'Mistral'
+          return {
+            id: m.id,
+            name: `${m.name || m.id}`,
+            displayName: providerName,
+          }
+        })
       },
     },
   }
@@ -467,6 +576,26 @@
   }
 
   /**
+   * Render model options into modelSelect dropdown
+   */
+  function renderModelOptions(models, selectedId = null) {
+    if (!modelSelect) return
+    modelSelect.disabled = false
+    modelSelect.innerHTML = `<option value="" disabled ${!selectedId ? 'selected' : ''}>${t('opt_select_model')}</option>`
+    models.forEach((m) => {
+      const opt = document.createElement('option')
+      opt.value = m.id
+      opt.textContent = m.name
+      opt.setAttribute('data-display-name', m.displayName)
+      if (selectedId && m.id === selectedId) {
+        opt.selected = true
+      }
+      modelSelect.appendChild(opt)
+    })
+    updateDevPreview()
+  }
+
+  /**
    * Update Provider UI (models, placeholders, links)
    */
   function updateProviderUI() {
@@ -487,15 +616,7 @@
     const prov = PROVIDERS[providerKey]
 
     if (modelSelect) {
-      modelSelect.disabled = false
-      modelSelect.innerHTML = `<option value="" disabled selected>${t('opt_select_model')}</option>`
-      prov.models.forEach((m) => {
-        const opt = document.createElement('option')
-        opt.value = m.id
-        opt.textContent = m.name
-        opt.setAttribute('data-display-name', m.displayName)
-        modelSelect.appendChild(opt)
-      })
+      renderModelOptions(prov.models)
     }
 
     if (apiKeyLabel) {
@@ -544,7 +665,7 @@
   }
 
   /**
-   * Test API Key against Provider API
+   * Test API Key and Load Available Models from Provider API
    */
   async function testApiKey() {
     const providerKey = providerSelect?.value
@@ -570,8 +691,20 @@
     hideFeedback()
 
     try {
-      await prov.testKey(apiKey)
-      showFeedback('success', t('test_valid_heading'), t('test_valid_text'))
+      const currentSelected = modelSelect?.value
+      const liveModels = await prov.loadModels(apiKey)
+      if (liveModels && liveModels.length > 0) {
+        renderModelOptions(liveModels, currentSelected || liveModels[0].id)
+        showFeedback(
+          'success',
+          t('test_valid_heading'),
+          t('test_models_loaded')
+            .replace('{count}', liveModels.length)
+            .replace('{provider}', prov.name),
+        )
+      } else {
+        showFeedback('success', t('test_valid_heading'), t('test_valid_text'))
+      }
     } catch (err) {
       showFeedback(
         'error',
