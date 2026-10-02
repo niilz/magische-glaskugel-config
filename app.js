@@ -985,24 +985,30 @@
   }
 
   /**
+   * Smoothly navigate to a legal article within the privacy tab
+   */
+  function navigateToLegalSection(targetId) {
+    activateTab('privacy')
+    const performScroll = () => {
+      const el = document.getElementById(targetId)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+    // Trigger scroll after DOM layout and CSS fadeIn transition
+    setTimeout(performScroll, 50)
+    setTimeout(performScroll, 250)
+  }
+
+  /**
    * Handle Hash Navigation (for #datenschutz, #terms, etc.)
    */
   function handleHashNavigation() {
     const hash = window.location.hash.toLowerCase()
     if (hash === '#datenschutz' || hash === '#privacy') {
-      activateTab('privacy')
-      setTimeout(() => {
-        document.getElementById('datenschutz')?.scrollIntoView({
-          behavior: 'smooth',
-        })
-      }, 100)
+      navigateToLegalSection('datenschutz')
     } else if (hash === '#nutzungsbedingungen' || hash === '#terms') {
-      activateTab('privacy')
-      setTimeout(() => {
-        document.getElementById('nutzungsbedingungen')?.scrollIntoView({
-          behavior: 'smooth',
-        })
-      }, 100)
+      navigateToLegalSection('nutzungsbedingungen')
     } else if (hash === '#anleitung' || hash === '#guide') {
       activateTab('guide')
     } else if (hash === '#verknuepfen' || hash === '#link') {
@@ -1067,20 +1073,16 @@
     if (footerPrivacyLink) {
       footerPrivacyLink.addEventListener('click', (e) => {
         e.preventDefault()
-        activateTab('privacy')
-        document.getElementById('datenschutz')?.scrollIntoView({
-          behavior: 'smooth',
-        })
+        window.location.hash = '#datenschutz'
+        navigateToLegalSection('datenschutz')
       })
     }
 
     if (footerTermsLink) {
       footerTermsLink.addEventListener('click', (e) => {
         e.preventDefault()
-        activateTab('privacy')
-        document.getElementById('nutzungsbedingungen')?.scrollIntoView({
-          behavior: 'smooth',
-        })
+        window.location.hash = '#nutzungsbedingungen'
+        navigateToLegalSection('nutzungsbedingungen')
       })
     }
 

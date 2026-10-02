@@ -661,67 +661,64 @@
               <p>
                 <strong>Hosting der Konfigurationsseite:</strong>
                 Diese Konfigurationsseite wird als statische Website über GitHub
-                Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA
-                94107, USA) bereitgestellt. Beim Aufruf verarbeitet GitHub aus
-                technischen Gründen Server-Logdaten (u. a. IP-Adresse,
-                Browsertyp, Zugriffszeitpunkt) zur Bereitstellung und
-                Absicherung des Dienstes. Der Betreiber des Skills speichert
-                selbst keine IP-Adressen, Cookies oder Tracking-Daten.
+                Pages bereitgestellt. Beim Aufruf der Seite werden durch den
+                Hosting-Provider technisch erforderliche Server-Logdaten (u. a.
+                IP-Adresse, Browsertyp, Zugriffszeitpunkt) verarbeitet, um die
+                Auslieferung und Sicherheit der Webseite zu gewährleisten. Der
+                Betreiber des Skills speichert selbst keine IP-Adressen, Cookies
+                oder Tracking-Daten.
               </p>
               <p>
                 <strong>Lokale Verarbeitung & Account Linking:</strong>
-                Alle Eingaben auf dieser Seite werden rein lokal in deinem
-                Webbrowser verarbeitet. Der von dir eingegebene API-Key wird
-                beim Klick auf "Mit Alexa verknüpfen" über eine verschlüsselte
-                Verbindung (HTTPS) im OAuth-Verfahren (Implicit Grant) als
-                Access Token direkt an Amazon Alexa übertragen und dort deinem
-                Konto zugeordnet.
+                Die Eingaben auf dieser Seite werden lokal im Webbrowser
+                verarbeitet. Der eingegebene API-Key wird beim Klick auf "Mit
+                Alexa verknüpfen" über eine verschlüsselte Verbindung (HTTPS) im
+                OAuth-Verfahren (Implicit Grant) als Access Token an Amazon
+                Alexa übermittelt und dort dem jeweiligen Nutzerkonto
+                zugeordnet.
               </p>
               <p>
                 <strong>Datenverarbeitung im Skill-Backend:</strong>
-                Amazon Alexa wandelt deine gesprochenen Fragen in Text um. Bei
-                jeder Sprachanfrage an den Skill sendet Alexa diesen Text
-                zusammen mit dem hinterlegten Token über eine verschlüsselte
-                Verbindung (HTTPS) an das Backend des Skills (gehostet auf AWS
-                Lambda in der EU-Region Frankfurt, eu-central-1). Das Backend
-                verarbeitet den API-Key ausschließlich flüchtig im
-                Arbeitsspeicher für die Dauer der Anfrage zur Weiterleitung an
-                den KI-Anbieter. Es findet keine Speicherung in Datenbanken
-                statt und API-Keys werden zu keinem Zeitpunkt in
-                Server-Protokollen (Logs) erfasst.
+                Amazon Alexa wandelt gesprochene Anfragen in Text um. Bei
+                Sprachanfragen an den Skill wird dieser Text zusammen mit dem
+                hinterlegten Token über eine verschlüsselte Verbindung (HTTPS)
+                an das Backend des Skills übermittelt. Das Backend verarbeitet
+                den API-Key und Fragetext flüchtig zur Weiterleitung an den
+                jeweils ausgewählten KI-Anbieter. Der Betreiber speichert weder
+                Fragetexte noch API-Keys in Datenbanken.
               </p>
               <p>
                 <strong
                   >Weiterleitung an den KI-Anbieter &
                   Drittlandübermittlung:</strong
                 >
-                Die Sprachanfrage wird zusammen mit deinem hinterlegten API-Key
-                an die Programmierschnittstelle (API) des von dir jeweils
-                ausgewählten KI-Anbieters übermittelt. Je nach gewähltem
-                Anbieter kann eine Datenverarbeitung auch auf Servern außerhalb
-                der Europäischen Union (insbesondere in den USA) stattfinden.
-                Für die Verarbeitung gelten die Datenschutzbestimmungen und
-                Sicherheitsvorkehrungen des jeweiligen Anbieters.
+                Die Sprachanfrage wird zusammen mit dem hinterlegten API-Key an
+                die Schnittstelle des jeweils ausgewählten KI-Anbieters
+                übermittelt. Je nach gewähltem Anbieter kann eine
+                Datenverarbeitung auch auf Servern außerhalb der Europäischen
+                Union stattfinden. Für die Verarbeitung gelten die
+                Datenschutzbestimmungen des jeweiligen Anbieters.
               </p>
               <p>
-                <strong>Rechtsgrundlage & Betroffenenrechte:</strong>
-                Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b
-                DSGVO (Vertragserfüllung zur Bereitstellung des von dir
-                angeforderten Dienstes). Du hast nach der DSGVO das Recht auf
-                Auskunft, Berichtigung, Löschung und Einschränkung der
-                Verarbeitung deiner Daten sowie das Recht auf Beschwerde bei
-                einer zuständigen Datenschutzaufsichtsbehörde.
+                <strong>Rechte der Betroffenen:</strong>
+                Die Verarbeitung von Daten erfolgt ausschließlich zur
+                Bereitstellung der angeforderten Skill-Funktionalität. Nutzern
+                stehen im Rahmen der gesetzlichen Bestimmungen die Rechte auf
+                Auskunft, Berichtigung oder Löschung ihrer verarbeiteten Daten
+                sowie ein Beschwerderecht bei den zuständigen
+                Datenschutzaufsichtsbehörden zu.
               </p>
               <p>
                 <strong>Löschung & Widerruf:</strong>
-                Die Verknüpfung kann jederzeit in zwei Schritten beendet werden:
+                Die Verknüpfung und Nutzung kann jederzeit in zwei Schritten
+                beendet werden:
                 <br />
-                1. <em>Alexa-Verknüpfung aufheben:</em> Deaktiviere den Skill in
-                der Alexa-App (unter Skills & Spiele → Magische Glaskugel).
-                Amazon entfernt damit den hinterlegten Token vollständig.
+                1. <em>Alexa-Verknüpfung aufheben:</em> Durch Deaktivieren des
+                Skills in der Alexa-App wird die Kontoverknüpfung aufgehoben.
                 <br />
-                2. <em>API-Key widerrufen:</em> Lösche oder sperre den Schlüssel
-                im Entwicklerportal deines jeweiligen KI-Anbieters.
+                2. <em>API-Key widerrufen:</em> Der erstellte Schlüssel kann
+                jederzeit im Portal des jeweiligen KI-Anbieters gesperrt oder
+                gelöscht werden.
               </p>
             </article>
 
@@ -733,31 +730,32 @@
                 <strong>Bereitstellung "wie besehen" (As-Is):</strong>
                 Der Skill und die Konfigurationsseite werden als technische
                 Schnittstelle ohne Garantie für unterbrechungsfreie
-                Verfügbarkeit oder Fehlerfreiheit bereitgestellt.
+                Verfügbarkeit, Funktionsfähigkeit oder Fehlerfreiheit
+                bereitgestellt.
               </p>
               <p>
                 <strong>Haftungsbeschränkung:</strong>
                 Der Betreiber haftet nur bei Vorsatz und grober Fahrlässigkeit
                 sowie bei Verletzung von Leben, Körper oder Gesundheit nach den
                 gesetzlichen Bestimmungen. Für sonstige Schäden, insbesondere
-                durch Dienstausfälle, Drittanbieter-Abrechnungen oder Fehler in
-                den Antworten generativer KI-Modelle, wird die Haftung im
-                gesetzlich zulässigen Rahmen ausgeschlossen.
+                durch Ausfälle, Drittanbieter-Abrechnungen oder Fehler in den
+                Antworten von KI-Modellen, wird die Haftung im gesetzlich
+                zulässigen Rahmen ausgeschlossen.
               </p>
               <p>
                 <strong>Eigene Verantwortung & Sicherheitsempfehlung:</strong>
-                Die Nutzung erfolgt auf eigenes Risiko mit deinem persönlichen
-                API-Key. Wir empfehlen dringend, für diesen Skill im Portal
-                deines KI-Anbieters einen separaten API-Schlüssel anzulegen und
-                dort ein striktes monatliches Ausgabenlimit (Budget / Usage
-                Limit) zu hinterlegen, um unerwartete Kosten zu verhindern.
+                Die Nutzung erfolgt auf eigenes Risiko mit dem persönlichen
+                API-Key des Nutzers. Es wird empfohlen, für die Nutzung des
+                Skills einen separaten API-Schlüssel anzulegen und beim
+                jeweiligen Anbieter ein Ausgabenlimit (Budget / Usage Limit) zu
+                konfigurieren.
               </p>
               <p>
                 <strong>Markenhinweis:</strong>
                 Amazon, Alexa und alle zugehörigen Logos sind Marken von
                 Amazon.com, Inc. oder deren verbundenen Unternehmen. Alle
-                genannten Produkt-, Modell- und Firmennamen sind Marken der
-                jeweiligen Eigentümer. Es besteht keine geschäftliche oder
+                weiteren genannten Produkt-, Modell- und Firmennamen sind Marken
+                der jeweiligen Eigentümer. Es besteht keine geschäftliche oder
                 offizielle Verbindung zu diesen Unternehmen.
               </p>
             </article>

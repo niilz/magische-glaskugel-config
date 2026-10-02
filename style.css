@@ -318,6 +318,10 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   min-height: 100%;
@@ -1239,6 +1243,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  scroll-margin-top: 24px;
 }
 
 .legal-heading {
