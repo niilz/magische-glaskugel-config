@@ -40,14 +40,15 @@
       faq_cost_title: '💰 Welche Kosten entstehen?',
       faq_cost_desc:
         'Die anfallenden Kosten hängen vom gewählten Anbieter, Tarif und Modell ab. Bitte informiere dich direkt beim jeweiligen Anbieter über die aktuellen Preise und Konditionen.',
-      faq_change_title: '🔄 Kann ich Modell oder Key später ändern?',
+      faq_change_title: '🔄 Wie kann ich Modell oder Key nachträglich ändern?',
       faq_change_desc:
-        'Ja! Öffne in der Alexa App einfach Skills & Spiele → Magische Glaskugel → Einstellungen → Konto verknüpfen. Dort kannst du jederzeit ein anderes Modell oder einen neuen Key wählen.',
-      privacy_title: 'Datenschutzerklärung & Nutzungsbedingungen',
+        'Um Modell oder Key zu wechseln: Deaktiviere den Skill in der Alexa-App (unter Skills & Spiele → Magische Glaskugel), aktiviere ihn anschließend erneut und tippe auf "Konto verknüpfen". So kannst du jederzeit ein anderes KI-Modell oder einen neuen Key hinterlegen.',
+      privacy_title: 'Rechtliche Hinweise & Datenschutz',
       privacy_subtitle:
-        'Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills Magische Glaskugel.',
+        'Informationen zur Datenverarbeitung und Nutzung des Alexa Skills.',
       legal_privacy_h3: '1. Datenschutzerklärung (Privacy Policy)',
-      legal_terms_h3: '2. Nutzungsbedingungen (Terms of Use)',
+      legal_terms_h3:
+        '2. Nutzungsbedingungen & Haftungsausschluss (Terms of Use)',
       footer_privacy: 'Datenschutz',
       footer_terms: 'Nutzungsbedingungen',
       opt_select_provider: '-- Anbieter wählen --',
@@ -116,14 +117,14 @@
       faq_cost_title: '💰 What are the costs?',
       faq_cost_desc:
         'Costs depend on the chosen provider, plan, and model. Please refer directly to the provider for current pricing and terms.',
-      faq_change_title: '🔄 Can I change model or key later?',
+      faq_change_title: '🔄 How do I change model or key later?',
       faq_change_desc:
-        'Yes! Simply go to Alexa App → Skills & Games → Magische Glaskugel → Settings → Link Account. You can switch models or update keys anytime.',
-      privacy_title: 'Privacy Policy & Terms of Use',
+        'To change your model or key: In the Alexa app, go to Skills & Games → Magische Glaskugel, deactivate the skill, activate it again, and tap "Link Account". This allows you to choose a new model or API key anytime.',
+      privacy_title: 'Legal Information & Privacy Policy',
       privacy_subtitle:
-        'Transparency regarding data processing for the Magische Glaskugel Alexa skill.',
+        'Information regarding data processing and use of the Alexa skill.',
       legal_privacy_h3: '1. Privacy Policy',
-      legal_terms_h3: '2. Terms of Use',
+      legal_terms_h3: '2. Terms of Use & Disclaimer',
       footer_privacy: 'Privacy Policy',
       footer_terms: 'Terms of Use',
       // Notifications

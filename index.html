@@ -41,7 +41,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="style.css?v=20261001-5" />
+    <link rel="stylesheet" href="style.css?v=20261002-1" />
   </head>
   <body>
     <div class="page-wrapper">
@@ -627,17 +627,19 @@
 
           <div class="faq-box" style="margin-top: 12px">
             <h3 class="faq-title" data-i18n="faq_change_title">
-              🔄 Kann ich Modell oder Key später ändern?
+              🔄 Wie kann ich Modell oder Key nachträglich ändern?
             </h3>
             <p data-i18n="faq_change_desc">
-              Ja! Öffne in der Alexa App einfach Skills & Spiele → Magische
-              Glaskugel → Einstellungen → Konto verknüpfen. Dort kannst du
-              jederzeit ein anderes Modell oder einen neuen Key wählen.
+              Um Modell oder Key zu wechseln: Deaktiviere den Skill in der
+              Alexa-App (unter Skills & Spiele → Magische Glaskugel), aktiviere
+              ihn anschließend erneut und tippe auf "Konto verknüpfen". So
+              kannst du jederzeit ein anderes KI-Modell oder einen neuen Key
+              auswählen.
             </p>
           </div>
         </section>
 
-        <!-- Panel 3: Privacy Policy (Datenschutz) & Terms (Required for Amazon Certification) -->
+        <!-- Panel 3: Legal & Privacy (Required for Amazon Skill Certification) -->
         <section
           id="privacyPanel"
           class="tab-panel"
@@ -646,11 +648,10 @@
         >
           <div class="panel-intro">
             <h2 class="panel-title" data-i18n="privacy_title">
-              Datenschutzerklärung & Nutzungsbedingungen
+              Rechtliche Hinweise & Datenschutz
             </h2>
             <p class="panel-subtitle" data-i18n="privacy_subtitle">
-              Transparenz über den Umgang mit Daten im Rahmen des Alexa Skills
-              Magische Glaskugel.
+              Informationen zur Datenverarbeitung und Nutzung des Alexa Skills.
             </p>
           </div>
 
@@ -660,56 +661,65 @@
                 1. Datenschutzerklärung (Privacy Policy)
               </h3>
               <p>
-                <strong>Verarbeitung des API-Keys:</strong>
-                Diese Webseite verarbeitet deine Eingaben direkt im Browser. Der
-                eingegebene API-Key wird bei Klick auf "Mit Alexa verknüpfen" an
-                den Amazon Alexa Autorisierungsserver übergeben und dort mit
-                deinem Alexa-Konto verknüpft.
+                <strong>Betrieb:</strong>
+                Dieser Skill und die zugehörige Konfigurationsseite werden rein
+                privat und nicht-kommerziell betrieben.
               </p>
               <p>
-                <strong>Nutzung im Skill:</strong>
-                Bei Anfragen an den Alexa Skill wird der Key verwendet, um deine
-                Anfrage an die gewählte KI-Schnittstelle weiterzuleiten und die
-                Antwort auf deinem Echo-Gerät auszugeben.
+                <strong>Lokale Verarbeitung (Client-Side):</strong>
+                Diese Webseite speichert keine Daten, Cookies oder IP-Adressen
+                auf eigenen Servern. Alle Eingaben werden ausschließlich lokal
+                in deinem Webbrowser verarbeitet.
               </p>
               <p>
-                <strong>Widerruf & Löschung:</strong>
-                Du kannst die Verknüpfung jederzeit in der Amazon Alexa App
-                unter
-                <em
-                  >Skills & Spiele &rarr; Magische Glaskugel &rarr;
-                  Einstellungen &rarr; Konto trennen</em
-                >
-                aufheben oder deinen API-Key direkt im Entwickler-Dashboard des
-                Anbieters löschen.
+                <strong>Übertragung an Amazon:</strong>
+                Der von dir eingegebene API-Key wird beim Klick auf "Mit Alexa
+                verknüpfen" über das Standard-OAuth-Verfahren (Implicit Grant)
+                verschlüsselt direkt an Amazon Alexa übermittelt und dort deinem
+                Konto zugeordnet. Der Entwickler speichert zu keinem Zeitpunkt
+                API-Keys in einer eigenen Datenbank.
+              </p>
+              <p>
+                <strong>Weiterleitung an KI-Anbieter:</strong>
+                Bei einer Sprachanfrage an den Skill wird die Anfrage zusammen
+                mit deinem hinterlegten Key an die API des von dir ausgewählten
+                Anbieters (Google, OpenAI, Anthropic oder OpenRouter)
+                weitergeleitet. Für die dortige Datenverarbeitung gelten die
+                Datenschutzbestimmungen des jeweiligen Anbieters.
+              </p>
+              <p>
+                <strong>Löschung & Widerruf:</strong>
+                Du kannst die Verknüpfung und den gespeicherten Key jederzeit
+                vollständig löschen, indem du den Skill in der Alexa-App
+                deaktivierst oder den Key im Entwicklerportal deines Anbieters
+                löschst.
               </p>
             </article>
 
             <article class="legal-article" id="nutzungsbedingungen">
               <h3 class="legal-heading" data-i18n="legal_terms_h3">
-                2. Nutzungsbedingungen (Terms of Use)
+                2. Nutzungsbedingungen & Haftungsausschluss (Terms of Use)
               </h3>
               <p>
-                Der Alexa Skill "Magische Glaskugel" ist eine Schnittstelle zur
-                Nutzung von generativen Sprachmodellen auf Amazon-Echo-Geräten.
+                <strong>Bereitstellung "wie besehen" (As-Is):</strong>
+                Der Skill wird als reine technische Schnittstelle ohne
+                Mängelgewähr und ohne Garantie für ständige Verfügbarkeit
+                bereitgestellt.
               </p>
               <p>
-                <strong>Eigener API-Key:</strong>
-                Die Nutzung setzt einen gültigen API-Key voraus, der den
-                Nutzungsbedingungen des jeweiligen Anbieters unterliegt.
-              </p>
-              <p>
-                <strong>Haftungsausschluss:</strong>
-                Künstliche Intelligenzen können fehlerhafte, unvollständige oder
-                irreführende Antworten generieren. Der Betreiber übernimmt keine
-                Haftung für die Richtigkeit der generierten Antworten sowie für
-                eventuelle Überschreitungen von Quoten deines Kontos.
+                <strong>Eigene Verantwortung:</strong>
+                Die Nutzung erfolgt auf eigenes Risiko mit deinem persönlichen
+                API-Key. Der Betreiber übernimmt keine Haftung für eventuelle
+                Kosten, Abrechnungen oder Kontosperrungen bei Drittanbietern
+                sowie für die Richtigkeit der von generativer KI erzeugten
+                Antworten.
               </p>
               <p>
                 <strong>Markenhinweis:</strong>
-                Amazon, Alexa und alle damit verbundenen Logos sind Marken von
-                Amazon.com, Inc. Dieses Projekt steht in keiner offiziellen
-                Verbindung zu Amazon oder den unterstützten KI-Anbietern.
+                Amazon, Alexa und alle zugehörigen Logos sind Marken von
+                Amazon.com, Inc. Gemini, ChatGPT, Claude und sonstige
+                Produktnamen sind Marken der jeweiligen Eigentümer. Es besteht
+                keine offizielle Verbindung zu diesen Unternehmen.
               </p>
             </article>
           </div>
@@ -749,6 +759,6 @@
       </footer>
     </div>
 
-    <script src="app.js?v=20261001-4"></script>
+    <script src="app.js?v=20261002-1"></script>
   </body>
 </html>
