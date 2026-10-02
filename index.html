@@ -519,8 +519,7 @@
               So erhältst du deinen API-Key
             </h2>
             <p class="panel-subtitle" data-i18n="guide_subtitle">
-              In wenigen Schritten erstellst du deinen persönlichen Google
-              Gemini API-Key.
+              In wenigen Schritten erstellst du deinen persönlichen API-Key.
             </p>
           </div>
 
@@ -571,10 +570,10 @@
               <div class="step-number">2</div>
               <div class="step-body">
                 <h3 class="step-heading" data-i18n="step2_heading">
-                  Mit Google-Konto anmelden
+                  Konto erstellen / anmelden
                 </h3>
                 <p data-i18n="step2_desc">
-                  Logge dich mit deinem Google-Konto ein.
+                  Logge dich beim gewählten Anbieter ein.
                 </p>
               </div>
             </li>
@@ -602,9 +601,8 @@
                   Schlüssel kopieren & hier einfügen
                 </h3>
                 <p data-i18n="step4_desc">
-                  Kopiere den generierten Schlüssel (beginnt mit
-                  <code>AIzaSy...</code>) in die Zwischenablage und füge ihn im
-                  Reiter
+                  Kopiere den generierten Schlüssel in die Zwischenablage und
+                  füge ihn im Reiter
                   <a href="#verknuepfen" class="inline-link" id="backToLinkTab"
                     >"Verknüpfen"</a
                   >
@@ -661,38 +659,69 @@
                 1. Datenschutzerklärung (Privacy Policy)
               </h3>
               <p>
-                <strong>Betrieb:</strong>
-                Dieser Skill und die zugehörige Konfigurationsseite werden rein
-                privat und nicht-kommerziell betrieben.
+                <strong>Hosting der Konfigurationsseite:</strong>
+                Diese Konfigurationsseite wird als statische Website über GitHub
+                Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA
+                94107, USA) bereitgestellt. Beim Aufruf verarbeitet GitHub aus
+                technischen Gründen Server-Logdaten (u. a. IP-Adresse,
+                Browsertyp, Zugriffszeitpunkt) zur Bereitstellung und
+                Absicherung des Dienstes. Der Betreiber des Skills speichert
+                selbst keine IP-Adressen, Cookies oder Tracking-Daten.
               </p>
               <p>
-                <strong>Lokale Verarbeitung (Client-Side):</strong>
-                Diese Webseite speichert keine Daten, Cookies oder IP-Adressen
-                auf eigenen Servern. Alle Eingaben werden ausschließlich lokal
-                in deinem Webbrowser verarbeitet.
+                <strong>Lokale Verarbeitung & Account Linking:</strong>
+                Alle Eingaben auf dieser Seite werden rein lokal in deinem
+                Webbrowser verarbeitet. Der von dir eingegebene API-Key wird
+                beim Klick auf "Mit Alexa verknüpfen" über eine verschlüsselte
+                Verbindung (HTTPS) im OAuth-Verfahren (Implicit Grant) als
+                Access Token direkt an Amazon Alexa übertragen und dort deinem
+                Konto zugeordnet.
               </p>
               <p>
-                <strong>Übertragung an Amazon:</strong>
-                Der von dir eingegebene API-Key wird beim Klick auf "Mit Alexa
-                verknüpfen" über das Standard-OAuth-Verfahren (Implicit Grant)
-                verschlüsselt direkt an Amazon Alexa übermittelt und dort deinem
-                Konto zugeordnet. Der Entwickler speichert zu keinem Zeitpunkt
-                API-Keys in einer eigenen Datenbank.
+                <strong>Datenverarbeitung im Skill-Backend:</strong>
+                Amazon Alexa wandelt deine gesprochenen Fragen in Text um. Bei
+                jeder Sprachanfrage an den Skill sendet Alexa diesen Text
+                zusammen mit dem hinterlegten Token über eine verschlüsselte
+                Verbindung (HTTPS) an das Backend des Skills (gehostet auf AWS
+                Lambda in der EU-Region Frankfurt, eu-central-1). Das Backend
+                verarbeitet den API-Key ausschließlich flüchtig im
+                Arbeitsspeicher für die Dauer der Anfrage zur Weiterleitung an
+                den KI-Anbieter. Es findet keine Speicherung in Datenbanken
+                statt und API-Keys werden zu keinem Zeitpunkt in
+                Server-Protokollen (Logs) erfasst.
               </p>
               <p>
-                <strong>Weiterleitung an KI-Anbieter:</strong>
-                Bei einer Sprachanfrage an den Skill wird die Anfrage zusammen
-                mit deinem hinterlegten Key an die API des von dir ausgewählten
-                Anbieters (Google, OpenAI, Anthropic oder OpenRouter)
-                weitergeleitet. Für die dortige Datenverarbeitung gelten die
-                Datenschutzbestimmungen des jeweiligen Anbieters.
+                <strong
+                  >Weiterleitung an den KI-Anbieter &
+                  Drittlandübermittlung:</strong
+                >
+                Die Sprachanfrage wird zusammen mit deinem hinterlegten API-Key
+                an die Programmierschnittstelle (API) des von dir jeweils
+                ausgewählten KI-Anbieters übermittelt. Je nach gewähltem
+                Anbieter kann eine Datenverarbeitung auch auf Servern außerhalb
+                der Europäischen Union (insbesondere in den USA) stattfinden.
+                Für die Verarbeitung gelten die Datenschutzbestimmungen und
+                Sicherheitsvorkehrungen des jeweiligen Anbieters.
+              </p>
+              <p>
+                <strong>Rechtsgrundlage & Betroffenenrechte:</strong>
+                Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b
+                DSGVO (Vertragserfüllung zur Bereitstellung des von dir
+                angeforderten Dienstes). Du hast nach der DSGVO das Recht auf
+                Auskunft, Berichtigung, Löschung und Einschränkung der
+                Verarbeitung deiner Daten sowie das Recht auf Beschwerde bei
+                einer zuständigen Datenschutzaufsichtsbehörde.
               </p>
               <p>
                 <strong>Löschung & Widerruf:</strong>
-                Du kannst die Verknüpfung und den gespeicherten Key jederzeit
-                vollständig löschen, indem du den Skill in der Alexa-App
-                deaktivierst oder den Key im Entwicklerportal deines Anbieters
-                löschst.
+                Die Verknüpfung kann jederzeit in zwei Schritten beendet werden:
+                <br />
+                1. <em>Alexa-Verknüpfung aufheben:</em> Deaktiviere den Skill in
+                der Alexa-App (unter Skills & Spiele → Magische Glaskugel).
+                Amazon entfernt damit den hinterlegten Token vollständig.
+                <br />
+                2. <em>API-Key widerrufen:</em> Lösche oder sperre den Schlüssel
+                im Entwicklerportal deines jeweiligen KI-Anbieters.
               </p>
             </article>
 
@@ -702,24 +731,34 @@
               </h3>
               <p>
                 <strong>Bereitstellung "wie besehen" (As-Is):</strong>
-                Der Skill wird als reine technische Schnittstelle ohne
-                Mängelgewähr und ohne Garantie für ständige Verfügbarkeit
-                bereitgestellt.
+                Der Skill und die Konfigurationsseite werden als technische
+                Schnittstelle ohne Garantie für unterbrechungsfreie
+                Verfügbarkeit oder Fehlerfreiheit bereitgestellt.
               </p>
               <p>
-                <strong>Eigene Verantwortung:</strong>
+                <strong>Haftungsbeschränkung:</strong>
+                Der Betreiber haftet nur bei Vorsatz und grober Fahrlässigkeit
+                sowie bei Verletzung von Leben, Körper oder Gesundheit nach den
+                gesetzlichen Bestimmungen. Für sonstige Schäden, insbesondere
+                durch Dienstausfälle, Drittanbieter-Abrechnungen oder Fehler in
+                den Antworten generativer KI-Modelle, wird die Haftung im
+                gesetzlich zulässigen Rahmen ausgeschlossen.
+              </p>
+              <p>
+                <strong>Eigene Verantwortung & Sicherheitsempfehlung:</strong>
                 Die Nutzung erfolgt auf eigenes Risiko mit deinem persönlichen
-                API-Key. Der Betreiber übernimmt keine Haftung für eventuelle
-                Kosten, Abrechnungen oder Kontosperrungen bei Drittanbietern
-                sowie für die Richtigkeit der von generativer KI erzeugten
-                Antworten.
+                API-Key. Wir empfehlen dringend, für diesen Skill im Portal
+                deines KI-Anbieters einen separaten API-Schlüssel anzulegen und
+                dort ein striktes monatliches Ausgabenlimit (Budget / Usage
+                Limit) zu hinterlegen, um unerwartete Kosten zu verhindern.
               </p>
               <p>
                 <strong>Markenhinweis:</strong>
                 Amazon, Alexa und alle zugehörigen Logos sind Marken von
-                Amazon.com, Inc. Gemini, ChatGPT, Claude und sonstige
-                Produktnamen sind Marken der jeweiligen Eigentümer. Es besteht
-                keine offizielle Verbindung zu diesen Unternehmen.
+                Amazon.com, Inc. oder deren verbundenen Unternehmen. Alle
+                genannten Produkt-, Modell- und Firmennamen sind Marken der
+                jeweiligen Eigentümer. Es besteht keine geschäftliche oder
+                offizielle Verbindung zu diesen Unternehmen.
               </p>
             </article>
           </div>
