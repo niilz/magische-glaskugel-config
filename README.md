@@ -45,24 +45,24 @@ sequenceDiagram
 
 1. GitHub Remote einrichten (falls noch nicht geschehen):
    ```bash
-   git remote add origin https://github.com/<dein-github-benutzername>/schlaubi-schlumpf-apikey-setup.git
+   git remote add origin https://github.com/niilz/magische-glaskugel-config.git
    ```
 2. Projekt direkt über die Kommandozeile bereitstellen:
    ```bash
    npm run deploy
    ```
-   Dieser Befehl prüft offene Änderungen und pusht den aktuellen Stand zu GitHub. Die integrierte GitHub Action (`.github/workflows/deploy.yml`) baut und veröffentlicht die Seite automatisch auf GitHub Pages.
+   Dieser Befehl prüft offene Änderungen und pusht den aktuellen Stand zu GitHub.
 
 3. Im GitHub-Repository unter **Settings** &rarr; **Pages**:
-   - **Source**: `GitHub Actions` (oder `Deploy from a branch` &rarr; `main` / `/ (root)`)
+   - **Source**: `Deploy from a branch` &rarr; `main` / `/ (root)`
 4. Deine Seite ist erreichbar unter:
-   `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/`
+   `https://niilz.github.io/magische-glaskugel-config/`
 
 ---
 
 ## ⚙️ Schritt 2: Account Linking in der Alexa Developer Console einrichten
 
-1. Öffne die [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) und wähle deinen Skill **Schlaubi Schlumpf**.
+1. Öffne die [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) und wähle deinen Skill **Magische Glaskugel**.
 2. Klicke im linken Menü unter **TOOLS** auf **Account Linking**.
 3. Aktiviere den Schalter:
    - **Do you allow users to create an account or link to an existing account with you?** &rarr; **Yes**.
@@ -70,13 +70,13 @@ sequenceDiagram
    - 🔘 **Implicit Grant** _(wichtig: nicht "Auth Code Grant")_.
 5. Trage folgende Werte ein:
    - **Authorization URI**:  
-     `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/`
+     `https://niilz.github.io/magische-glaskugel-config/`
    - **Client ID**:  
-     `alexa-schlaubi-schlumpf` _(beliebiger Bezeichner)_
+     `magische-glaskugel` _(beliebiger Bezeichner)_
    - **Scopes**:  
-     `gemini` _(oder leer lassen)_
+     _(leer lassen)_
    - **Domains**:  
-     `<dein-github-benutzername>.github.io`
+     `niilz.github.io`
 6. Klicke oben rechts auf **Save**.
 
 ---
@@ -86,9 +86,9 @@ sequenceDiagram
 Amazon verlangt für Skills mit Account Linking zwingend Links zu Datenschutz und Nutzungsbedingungen. Diese sind direkt in dieser GitHub Pages App integriert:
 
 - **Privacy Policy URL**:  
-  `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/#datenschutz`
+  `https://niilz.github.io/magische-glaskugel-config/#datenschutz`
 - **Terms of Use URL**:  
-  `https://<dein-github-benutzername>.github.io/schlaubi-schlumpf-apikey-setup/#nutzungsbedingungen`
+  `https://niilz.github.io/magische-glaskugel-config/#nutzungsbedingungen`
 
 Trage diese beiden Links im Reiter **Distribution** &rarr; **Privacy & Compliance** in der Alexa Developer Console ein.
 
@@ -187,15 +187,13 @@ Unten auf der Seite findest du den Link **🛠️ Entwickler- & Test-Modus**:
 ## 📁 Projektstruktur
 
 ```
-schlaubi-schlumpf-apikey-setup/
+magische-glaskugel-config/
 ├── index.html                       # Hauptseite (Verknüpfungsformular, Anleitung, Rechtliches)
 ├── style.css                        # Modernes, barrierefreies Styling (Hell/Dunkel, Mobil-optimiert)
 ├── app.js                           # OAuth Implicit Grant Logik, Key-Tester, i18n
 ├── favicon.svg                      # Logo & Favicon
 ├── .nojekyll                        # Verhindert Jekyll-Build auf GitHub Pages
-├── README.md                        # Dieses Dokument
-└── examples/
-    └── lambda-handler-example.ts    # Referenzcode für den Alexa Skill Lambda Handler
+└── README.md                        # Dieses Dokument
 ```
 
 ---

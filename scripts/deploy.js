@@ -31,11 +31,11 @@ function main() {
     console.error('\n❌ No git remote "origin" configured.')
     console.error('Please configure your GitHub repository remote first:')
     console.error(
-      '  git remote add origin https://github.com/<username>/schlaubi-schlumpf-apikey-setup.git',
+      '  git remote add origin https://github.com/<username>/magische-glaskugel-config.git',
     )
     console.error('or (via SSH):')
     console.error(
-      '  git remote add origin git@github.com:<username>/schlaubi-schlumpf-apikey-setup.git\n',
+      '  git remote add origin git@github.com:<username>/magische-glaskugel-config.git\n',
     )
     process.exit(1)
   }
